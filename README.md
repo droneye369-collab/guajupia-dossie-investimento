@@ -7,6 +7,7 @@ Projeto recuperado do histórico do Telegram de **20 de agosto de 2026** e prese
 - **Versão completa:** https://droneye369-collab.github.io/guajupia-dossie-investimento/
 - **Versão simples:** https://droneye369-collab.github.io/guajupia-dossie-investimento/simples/
 - **Baixar pacote completo:** https://droneye369-collab.github.io/guajupia-dossie-investimento/download/guajupia-projeto-recuperado-20-08-2026.zip
+- **Release preservada:** https://github.com/droneye369-collab/guajupia-dossie-investimento/releases/tag/v1.0-recuperado
 
 ## Conteúdo
 
