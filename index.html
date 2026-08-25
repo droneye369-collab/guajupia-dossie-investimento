@@ -1,0 +1,2078 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guajupiá — Dossiê de Implantação e Investimento</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,500;0,700;0,800;1,600&family=Karla:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --tinta:#221B12;
+  --mata:#20402C;
+  --mata-clara:#2E5C3F;
+  --broto:#6F8C3C;
+  --areia:#E7DCC6;
+  --papel:#F7F2E6;
+  --papel-2:#FDFAF2;
+  --ocre:#B5842A;
+  --ferrugem:#8E3F27;
+  --linha:rgba(34,27,18,.16);
+  --linha-forte:rgba(34,27,18,.32);
+  --sombra:0 1px 0 rgba(34,27,18,.06), 0 8px 24px -18px rgba(34,27,18,.5);
+  --display:'Bitter',Georgia,'Times New Roman',serif;
+  --corpo:'Karla',system-ui,-apple-system,Segoe UI,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --rail:236px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--corpo);
+  color:var(--tinta);
+  background:var(--areia);
+  font-size:16px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+:focus-visible{outline:2.5px solid var(--ocre);outline-offset:2px;border-radius:2px}
+
+/* ---------- topografia de fundo (assinatura) ---------- */
+.topografia{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5}
+
+/* ---------- layout ---------- */
+.app{display:grid;grid-template-columns:var(--rail) 1fr;min-height:100vh;position:relative;z-index:1}
+
+/* ---------- rail / registro de talhões ---------- */
+.rail{
+  background:var(--mata);
+  color:var(--papel);
+  border-right:1px solid rgba(0,0,0,.3);
+  display:flex;flex-direction:column;
+  position:sticky;top:0;height:100vh;
+}
+.marca{padding:20px 18px 16px;border-bottom:1px solid rgba(247,242,230,.18)}
+.marca .sigla{
+  font-family:var(--mono);font-size:11px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--ocre);display:block;margin-bottom:6px;
+}
+.marca h1{font-family:var(--display);font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1}
+.marca p{font-size:12.5px;color:rgba(247,242,230,.66);margin-top:6px;line-height:1.35}
+
+.indice{flex:1;overflow-y:auto;padding:10px 0 16px}
+.indice::-webkit-scrollbar{width:6px}
+.indice::-webkit-scrollbar-thumb{background:rgba(247,242,230,.22);border-radius:3px}
+.item{
+  display:grid;grid-template-columns:32px 1fr;gap:8px;align-items:baseline;
+  width:100%;text-align:left;background:none;border:0;cursor:pointer;
+  padding:8px 18px;color:rgba(247,242,230,.8);font-family:var(--corpo);font-size:14px;
+  border-left:3px solid transparent;transition:background .14s,color .14s;
+}
+.item .n{font-family:var(--mono);font-size:11px;color:rgba(247,242,230,.45)}
+.item:hover{background:rgba(247,242,230,.07);color:#fff}
+.item[aria-current="true"]{background:rgba(247,242,230,.11);color:#fff;border-left-color:var(--ocre);font-weight:700}
+.item[aria-current="true"] .n{color:var(--ocre)}
+
+.rail-pe{padding:12px 18px 16px;border-top:1px solid rgba(247,242,230,.18);font-family:var(--mono);font-size:10.5px;color:rgba(247,242,230,.5);line-height:1.6}
+
+/* ---------- palco ---------- */
+.palco{display:flex;flex-direction:column;min-width:0}
+.topo{
+  position:sticky;top:0;z-index:5;
+  background:rgba(231,220,198,.93);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--linha);
+  display:flex;justify-content:space-between;align-items:center;gap:14px;
+  padding:10px 26px;flex-wrap:wrap;
+}
+.topo .trilha{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(34,27,18,.55)}
+.acoes{display:flex;gap:6px;flex-wrap:wrap}
+
+button{font-family:var(--corpo)}
+.bt{
+  background:var(--papel-2);color:var(--tinta);border:1px solid var(--linha-forte);
+  padding:6px 12px;border-radius:3px;cursor:pointer;font-size:13px;font-weight:500;
+  transition:background .14s,border-color .14s;
+}
+.bt:hover{background:#fff;border-color:var(--tinta)}
+.bt-p{background:var(--mata);color:var(--papel);border-color:var(--mata)}
+.bt-p:hover{background:#183020;color:#fff}
+.bt-min{background:none;border:0;color:var(--ferrugem);font-size:12px;cursor:pointer;padding:2px 4px;text-decoration:underline;text-underline-offset:2px}
+.bt-min:hover{color:#6d2f1d}
+
+main{padding:32px 26px 80px;max-width:1080px;width:100%;margin:0 auto;flex:1}
+
+/* ---------- seções ---------- */
+.sec{display:none}
+.sec.viva{display:block;animation:sobe .26s ease-out}
+@keyframes sobe{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.sec-cab{margin-bottom:22px;padding-bottom:14px;border-bottom:2px solid var(--tinta)}
+.sec-cab .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ferrugem);display:block;margin-bottom:8px}
+.sec-cab h2{font-family:var(--display);font-size:clamp(28px,4vw,40px);font-weight:800;line-height:1.03;letter-spacing:-.025em}
+.sec-cab .sub{margin-top:8px;font-size:15.5px;color:rgba(34,27,18,.72);max-width:62ch}
+
+h3{font-family:var(--display);font-size:19px;font-weight:700;margin:26px 0 10px;letter-spacing:-.01em}
+h3:first-child{margin-top:0}
+p{max-width:70ch}
+p+p{margin-top:10px}
+.nota{font-size:13px;color:rgba(34,27,18,.62);line-height:1.5;max-width:74ch}
+strong,b{font-weight:700}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums;font-weight:500}
+
+/* ---------- capa ---------- */
+.capa{border:2px solid var(--tinta);background:var(--papel);padding:0;overflow:hidden}
+.capa-topo{padding:16px 24px;border-bottom:1px solid var(--linha-forte);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(34,27,18,.6)}
+.capa-corpo{padding:38px 24px 30px;position:relative}
+.capa-corpo h2{font-family:var(--display);font-size:clamp(38px,7vw,72px);font-weight:800;line-height:.94;letter-spacing:-.035em;max-width:14ch}
+.capa-corpo .lema{font-family:var(--display);font-style:italic;font-weight:600;font-size:clamp(17px,2.4vw,22px);color:var(--mata);margin-top:16px;max-width:44ch;line-height:1.35}
+.capa-corpo .desc{margin-top:16px;max-width:56ch;font-size:15.5px}
+.capa-grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));border-top:1px solid var(--linha-forte)}
+.capa-grade div{padding:16px 20px;border-right:1px solid var(--linha)}
+.capa-grade div:last-child{border-right:0}
+.capa-grade .v{font-family:var(--mono);font-size:24px;font-weight:600;color:var(--mata);display:block;line-height:1.1;font-variant-numeric:tabular-nums}
+.capa-grade .r{font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;color:rgba(34,27,18,.6);margin-top:6px;display:block}
+.assinantes{margin-top:18px;display:flex;gap:26px;flex-wrap:wrap;font-size:13px}
+.assinantes span{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(34,27,18,.55);margin-bottom:2px}
+
+/* ---------- fichas / cards ---------- */
+.grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:14px}
+.ficha{background:var(--papel-2);border:1px solid var(--linha);border-left:3px solid var(--broto);padding:14px 16px;border-radius:2px;box-shadow:var(--sombra)}
+.ficha .cod{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ferrugem);display:block;margin-bottom:5px}
+.ficha h4{font-family:var(--display);font-size:17px;font-weight:700;margin-bottom:5px;letter-spacing:-.01em}
+.ficha p{font-size:14px;color:rgba(34,27,18,.78)}
+.ficha--ocre{border-left-color:var(--ocre)}
+.ficha--ferro{border-left-color:var(--ferrugem)}
+.ficha--mata{border-left-color:var(--mata)}
+
+/* ---------- tabelas ---------- */
+.tab-wrap{overflow-x:auto;margin-top:14px;border:1px solid var(--linha-forte);background:var(--papel-2)}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:520px}
+th{
+  background:var(--mata);color:var(--papel);text-align:left;padding:9px 12px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:500;
+  white-space:nowrap;
+}
+td{padding:8px 12px;border-top:1px solid var(--linha);vertical-align:top}
+tbody tr:nth-child(even){background:rgba(34,27,18,.025)}
+td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+tfoot td{border-top:2px solid var(--tinta);font-weight:700;background:rgba(181,132,42,.1)}
+.tab-wrap table tr.risco td{background:rgba(142,63,39,.07)}
+
+/* ---------- campos editáveis ---------- */
+input[type=text],input[type=number],input[type=password],input[type=date],select,textarea{
+  font-family:var(--corpo);font-size:14px;color:var(--tinta);
+  background:transparent;border:0;border-bottom:1px dashed var(--linha-forte);
+  padding:3px 2px;width:100%;border-radius:0;
+}
+input[type=number],.campo-num{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right}
+input:hover,select:hover,textarea:hover{background:rgba(181,132,42,.09)}
+input:focus,select:focus,textarea:focus{background:#fff;border-bottom-style:solid;border-bottom-color:var(--ocre);outline:none}
+select{border:1px solid var(--linha-forte);border-radius:3px;padding:6px 8px;background:var(--papel-2);cursor:pointer}
+textarea{border:1px solid var(--linha-forte);border-radius:3px;padding:9px 11px;line-height:1.5;resize:vertical;font-size:14px}
+input[type=checkbox]{width:auto;accent-color:var(--mata);cursor:pointer;transform:scale(1.15)}
+label{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:rgba(34,27,18,.66);margin-bottom:4px}
+
+.aviso-edicao{
+  display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:rgba(34,27,18,.62);
+  border:1px dashed var(--linha-forte);padding:5px 10px;border-radius:3px;margin-top:12px;
+}
+.aviso-edicao::before{content:"";width:9px;height:9px;background:var(--ocre);border-radius:1px;flex:none}
+
+/* ---------- painel de controle (investimento) ---------- */
+.painel{display:grid;grid-template-columns:300px 1fr;gap:20px;margin-top:16px;align-items:start}
+.controles{background:var(--papel-2);border:1px solid var(--linha-forte);padding:16px;border-radius:2px;box-shadow:var(--sombra)}
+.ctl{margin-bottom:13px}
+.ctl:last-child{margin-bottom:0}
+.ctl input[type=number]{border:1px solid var(--linha-forte);border-radius:3px;padding:6px 8px;background:#fff}
+.escolha{display:flex;gap:6px;margin-top:2px}
+.escolha button{
+  flex:1;padding:8px 6px;border:1px solid var(--linha-forte);background:var(--papel);
+  cursor:pointer;font-size:12.5px;border-radius:3px;line-height:1.25;transition:.14s;
+}
+.escolha button.on{background:var(--mata);color:var(--papel);border-color:var(--mata);font-weight:700}
+.escolha button b{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em}
+
+.leitura{display:grid;gap:12px}
+.placar{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:10px}
+.metrica{background:var(--papel-2);border:1px solid var(--linha);border-top:3px solid var(--mata);padding:12px 14px;border-radius:2px}
+.metrica .r{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(34,27,18,.6);display:block}
+.metrica .v{font-family:var(--mono);font-size:23px;font-weight:600;line-height:1.15;margin-top:5px;display:block;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.metrica .obs{font-size:12px;color:rgba(34,27,18,.6);margin-top:3px;display:block;line-height:1.35}
+.metrica.bom{border-top-color:var(--broto)}
+.metrica.bom .v{color:var(--mata)}
+.metrica.ruim{border-top-color:var(--ferrugem)}
+.metrica.ruim .v{color:var(--ferrugem)}
+.metrica.ocre{border-top-color:var(--ocre)}
+
+/* ---------- gráfico terreno (assinatura) ---------- */
+.terreno{background:var(--papel-2);border:1px solid var(--linha-forte);border-radius:2px;padding:14px 16px 10px;box-shadow:var(--sombra)}
+.terreno-cab{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.terreno-cab h4{font-family:var(--display);font-size:16px;font-weight:700}
+.terreno-cab .leg{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(34,27,18,.55)}
+.terreno svg{width:100%;height:auto;display:block}
+.legenda{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;font-size:12px;color:rgba(34,27,18,.68)}
+.legenda i{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+
+/* ---------- barra de progresso ---------- */
+.progresso{height:8px;background:rgba(34,27,18,.1);border-radius:2px;overflow:hidden;margin-top:6px;border:1px solid var(--linha)}
+.progresso i{display:block;height:100%;background:var(--broto);transition:width .3s}
+
+/* ---------- linha do tempo ---------- */
+.linha-tempo{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:0;margin-top:16px;border:1px solid var(--linha-forte);background:var(--papel-2)}
+.fase{padding:14px;border-right:1px solid var(--linha);border-top:4px solid var(--broto)}
+.fase:last-child{border-right:0}
+.fase .m{font-family:var(--mono);font-size:19px;font-weight:600;color:var(--mata);display:block}
+.fase .per{font-family:var(--mono);font-size:11px;color:rgba(34,27,18,.6);display:block;margin:2px 0 8px}
+.fase .foco{font-size:13.5px;line-height:1.45}
+.fase .tag{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;background:var(--ocre);color:var(--tinta);padding:1px 6px;border-radius:2px;margin-top:8px;text-transform:uppercase}
+.fase .m input{font-size:19px;font-weight:600;color:var(--mata);text-align:left}
+.fase .per input{font-size:11px;color:rgba(34,27,18,.7);text-align:left}
+.fase .foco textarea{min-height:66px;margin-top:5px;padding:6px 7px;background:rgba(255,255,255,.35);font-size:13px;line-height:1.35}
+.fase .tag input{font-family:var(--mono);font-size:10px;font-weight:600;text-align:center;text-transform:uppercase;border-bottom-color:rgba(34,27,18,.35);min-width:54px}
+
+/* ---------- placeholder de imagem ---------- */
+.img-ph{
+  height:170px;border:1px dashed var(--linha-forte);border-radius:2px;margin-top:16px;
+  display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;
+  font-family:var(--mono);font-size:12px;color:rgba(34,27,18,.5);line-height:1.6;
+  background:repeating-linear-gradient(135deg,rgba(34,27,18,.035) 0 9px,transparent 9px 18px);
+}
+
+/* ---------- foto do sítio na capa ---------- */
+.foto-moldura{margin-top:18px}
+.foto-quadro{
+  position:relative;aspect-ratio:16/9;border:1px solid var(--linha-forte);border-radius:3px;
+  overflow:hidden;background:repeating-linear-gradient(135deg,rgba(34,27,18,.04) 0 9px,transparent 9px 18px);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;min-height:160px
+}
+.foto-quadro:hover{border-color:var(--mata)}
+.foto-placeholder{font-family:var(--mono);font-size:12px;color:rgba(34,27,18,.5);letter-spacing:.04em;text-align:center;padding:16px}
+.foto-img{width:100%;height:100%;object-fit:cover;display:block}
+.resumo-situacao{margin-top:18px;border-top:1px solid var(--linha);padding-top:14px}
+.resumo-situacao h3{font-family:var(--display);font-size:17px;letter-spacing:-.01em;margin:0 0 6px;color:var(--ferrugem)}
+.resumo-situacao p{font-size:14.5px;line-height:1.6;max-width:62ch;margin:0}
+
+/* ---------- narrativa gerada por IA ---------- */
+.narrativa{
+  margin-top:18px;border-left:3px solid var(--ocre);background:rgba(181,132,42,.08);
+  padding:13px 16px;border-radius:0 2px 2px 0;font-size:14.5px;line-height:1.6;
+}
+.narrativa .marca-ia{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ferrugem);display:block;margin-bottom:6px}
+.narrativa p+p{margin-top:8px}
+
+/* ---------- gaveta IA ---------- */
+.gaveta{
+  position:fixed;top:0;right:0;height:100vh;width:min(440px,100%);z-index:40;
+  background:var(--papel);border-left:2px solid var(--tinta);box-shadow:-14px 0 40px -20px rgba(34,27,18,.6);
+  display:flex;flex-direction:column;transform:translateX(101%);transition:transform .26s ease;
+}
+.gaveta.aberta{transform:none}
+.gaveta-cab{padding:16px 20px;border-bottom:1px solid var(--linha-forte);display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.gaveta-cab h3{margin:0;font-size:20px}
+.gaveta-cab p{font-size:12.5px;color:rgba(34,27,18,.65);margin-top:3px}
+.gaveta-corpo{padding:18px 20px 26px;overflow-y:auto;flex:1}
+.gaveta .ctl{margin-bottom:15px}
+.fechar{background:none;border:1px solid var(--linha-forte);width:28px;height:28px;border-radius:3px;cursor:pointer;font-size:15px;line-height:1;flex:none;color:var(--tinta)}
+.fechar:hover{background:var(--tinta);color:var(--papel)}
+.veu{position:fixed;inset:0;background:rgba(34,27,18,.42);z-index:39;opacity:0;pointer-events:none;transition:opacity .26s}
+.veu.on{opacity:1;pointer-events:auto}
+.estado-ia{font-size:13px;padding:9px 12px;border-radius:3px;margin-top:10px;line-height:1.5;border:1px solid}
+.estado-ia.info{background:rgba(32,64,44,.08);border-color:rgba(32,64,44,.3)}
+.estado-ia.erro{background:rgba(142,63,39,.09);border-color:rgba(142,63,39,.4);color:#6d2f1d}
+.estado-ia.ok{background:rgba(111,140,60,.14);border-color:rgba(111,140,60,.5)}
+.saida-ia{margin-top:12px;background:var(--papel-2);border:1px solid var(--linha-forte);border-radius:3px;padding:12px 14px;font-size:14px;line-height:1.6;white-space:pre-wrap;max-height:320px;overflow-y:auto}
+.chave-nota{font-size:11.5px;color:rgba(34,27,18,.6);margin-top:5px;line-height:1.45}
+
+/* ---------- navegação de rodapé ---------- */
+.nav-pe{display:flex;justify-content:space-between;gap:12px;margin-top:44px;padding-top:16px;border-top:1px solid var(--linha-forte)}
+.nav-pe button{background:none;border:0;cursor:pointer;font-family:var(--corpo);font-size:14px;color:var(--mata);padding:6px 2px;text-align:left}
+.nav-pe button:hover{color:var(--ferrugem)}
+.nav-pe button span{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(34,27,18,.5)}
+.nav-pe button:last-child{text-align:right}
+.nav-pe button[disabled]{opacity:.3;cursor:default}
+
+/* ---------- responsivo ---------- */
+@media (max-width:900px), (hover:none) and (pointer:coarse){
+  html,body{width:100%;max-width:100%;overflow-x:hidden}
+  .topografia{width:100%;max-width:100%;overflow:hidden}
+  .app{grid-template-columns:minmax(0,1fr);width:100%;max-width:100%;min-width:0}
+  .rail{position:static;height:auto;width:100%;max-width:100%;min-width:0;flex-direction:column;overflow:hidden}
+  .marca{padding:14px 16px 11px}
+  .marca h1{font-size:24px}
+  .marca p{font-size:12px;margin-top:4px}
+  .indice{display:flex;width:100%;max-width:100%;min-width:0;overflow-x:auto;overflow-y:hidden;padding:7px 10px;gap:4px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+  .item{width:auto;flex:none;border-left:0;border-bottom:3px solid transparent;padding:8px 11px;white-space:nowrap;grid-template-columns:auto auto;border-radius:3px;scroll-snap-align:start;min-height:42px}
+  .item[aria-current="true"]{border-left-color:transparent;border-bottom-color:var(--ocre)}
+  .rail-pe{display:none}
+  .palco{width:100%;max-width:100%;min-width:0}
+  .topo{padding:8px 12px;display:block;width:100%;max-width:100%}
+  .topo .trilha{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .acoes{margin-top:7px;display:flex;flex-wrap:nowrap;overflow-x:auto;max-width:100%;padding-bottom:3px;-webkit-overflow-scrolling:touch}
+  .acoes .bt{flex:0 0 auto;min-height:38px;padding:7px 11px}
+  main{padding:22px 12px 56px;max-width:100%;min-width:0;overflow:hidden}
+  .conteudo,.sec,.tab-wrap{max-width:100%;min-width:0}
+  .tab-wrap{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  table{min-width:640px}
+  .painel{grid-template-columns:minmax(0,1fr)}
+  .controles,.leitura,.terreno{min-width:0;max-width:100%}
+  .sec-cab{margin-bottom:18px;padding-bottom:11px}
+  .sec-cab h2{font-size:clamp(27px,8vw,34px)}
+  .sec-cab .sub{font-size:14px}
+  .grade{grid-template-columns:minmax(0,1fr)}
+  .capa-corpo{padding:25px 17px}
+  .capa-grade{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .capa-grade div{padding:13px 14px}
+  .nav-pe{margin-top:32px;align-items:flex-start}
+  .nav-pe button{max-width:48%;font-size:13px}
+  .gaveta{width:100%;max-width:100%}
+}
+
+@media (max-width:600px), (orientation:portrait) and (hover:none) and (pointer:coarse){
+  body{font-size:15px}
+  main{padding:18px 10px 48px}
+  .topo{padding-inline:10px}
+  .acoes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;overflow:visible}
+  .acoes .bt{width:100%;min-height:44px;white-space:normal;line-height:1.25}
+  .acoes .bt:last-child{grid-column:1/-1}
+  .marca{padding-inline:14px}
+  .linha-tempo{grid-template-columns:1fr}
+  .fase{border-right:0;border-bottom:1px solid var(--linha)}
+  .fase:last-child{border-bottom:0}
+  .placar{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .metrica{padding:10px}
+  .metrica .v{font-size:19px}
+  .escolha{overflow-x:auto}
+  .escolha button{min-width:96px}
+
+  #sec-rotina .tab-wrap{border:0;background:transparent;overflow:visible}
+  #sec-rotina table,#sec-rotina tbody{display:block;width:100%;min-width:0}
+  #sec-rotina thead{display:none}
+  #sec-rotina tr{display:block;width:100%;margin-bottom:10px;padding:12px 13px;background:var(--papel-2);border:1px solid var(--linha-forte);box-shadow:var(--sombra)}
+  #sec-rotina td{display:block;width:100%;padding:5px 0;border:0;text-align:left}
+  #sec-rotina td::before{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:rgba(34,27,18,.56);margin-bottom:2px}
+  #sec-rotina td:nth-child(1)::before{content:'Frequência'}
+  #sec-rotina td:nth-child(2)::before{content:'Ação'}
+  #sec-rotina td:nth-child(3)::before{content:'Responsável'}
+  #sec-rotina td:nth-child(4)::before{content:'Situação'}
+  #sec-rotina td input,#sec-rotina td select{width:100%;min-height:40px;text-align:left}
+  #sec-rotina td select{margin-top:2px}
+  #sec-rotina .nota{font-size:13px}
+
+  #sec-cronograma .tab-wrap{border:0;background:transparent;overflow:visible}
+  #sec-cronograma .tab-wrap table,#sec-cronograma .tab-wrap tbody{display:block;width:100%;min-width:0}
+  #sec-cronograma .tab-wrap thead{display:none}
+  #sec-cronograma .tab-wrap tr{display:block;width:100%;margin-bottom:9px;padding:11px 12px;background:var(--papel-2);border:1px solid var(--linha-forte)}
+  #sec-cronograma .tab-wrap td{display:block;width:100%;padding:5px 0;border:0;text-align:left}
+  #sec-cronograma .tab-wrap td::before{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:rgba(34,27,18,.56);margin-bottom:2px}
+  #sec-cronograma .tab-wrap td:nth-child(1)::before{content:'Fase'}
+  #sec-cronograma .tab-wrap td:nth-child(2)::before{content:'Critério de encerramento'}
+  #sec-cronograma .tab-wrap td:nth-child(3)::before{content:'Validado'}
+  #sec-cronograma .tab-wrap td textarea{min-height:64px;text-align:left}
+  #sec-cronograma .tab-wrap td:last-child{text-align:left!important}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+
+/* ---------- impressão ---------- */
+@media print{
+  body{background:#fff}
+  .rail,.topo,.nav-pe,.gaveta,.veu,.topografia,.aviso-edicao,.bt,.bt-min{display:none!important}
+  .app{display:block}
+  main{max-width:none;padding:0}
+  .sec{display:block!important;page-break-after:always;margin-bottom:26px}
+  .sec:last-child{page-break-after:auto}
+  input,select,textarea{border:0!important;background:none!important;color:#000}
+  .ficha,.metrica,.terreno,.tab-wrap{box-shadow:none;break-inside:avoid}
+  @page{margin:14mm}
+}
+</style>
+</head>
+<body>
+
+<svg class="topografia" aria-hidden="true" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1200 800">
+  <g fill="none" stroke="#221B12" stroke-opacity=".07" stroke-width="1.1">
+    <path d="M-40 640 C 180 600, 300 690, 470 650 S 800 560, 1000 610 S 1180 660, 1260 630"/>
+    <path d="M-40 590 C 190 545, 320 640, 480 596 S 800 505, 1010 558 S 1180 610, 1260 578"/>
+    <path d="M-40 538 C 200 490, 340 588, 492 542 S 800 450, 1020 505 S 1180 558, 1260 524"/>
+    <path d="M-40 484 C 210 434, 356 534, 504 486 S 800 394, 1030 450 S 1180 504, 1260 468"/>
+    <path d="M60 428 C 260 380, 380 476, 520 430 S 800 340, 1020 394 S 1160 448, 1240 412"/>
+    <path d="M140 372 C 310 328, 410 418, 540 374 S 790 288, 990 338 S 1120 392, 1200 358"/>
+    <path d="M230 316 C 370 278, 450 360, 566 320 S 780 240, 950 284 S 1060 336, 1140 304"/>
+    <path d="M330 262 C 440 232, 500 300, 596 268 S 760 198, 900 234 S 990 282, 1060 254"/>
+    <path d="M430 210 C 510 190, 556 246, 626 220 S 730 164, 840 190 S 900 230, 960 208"/>
+    <path d="M520 162 C 578 150, 610 192, 660 172 S 720 136, 790 154"/>
+  </g>
+</svg>
+
+<div class="app">
+  <!-- ÍNDICE LATERAL -->
+  <aside class="rail">
+    <div class="marca">
+      <span class="sigla" id="m-sigla">Dossiê · 2026–2027</span>
+      <h1>Guajupiá</h1>
+      <p id="m-sub">Implantação agroecológica<br>Seis meses de execução</p>
+    </div>
+    <nav class="indice" id="indice" aria-label="Seções do dossiê"></nav>
+    <div class="rail-pe" id="rail-pe">
+      15/08/2026 → 15/02/2027<br>
+      Todos os números são editáveis.
+    </div>
+  </aside>
+
+  <!-- PALCO -->
+  <div class="palco">
+    <div class="topo">
+      <span class="trilha" id="trilha">01 · Capa</span>
+      <div class="acoes">
+        <button class="bt" id="bt-idioma">EN</button>
+        <button class="bt" id="bt-ia">Gerar texto com IA</button>
+        <button class="bt" id="bt-importar">Importar dados</button>
+        <button class="bt" id="bt-exportar">Exportar dados</button>
+        <button class="bt" id="bt-imprimir">Imprimir / PDF</button>
+        <button class="bt" id="bt-restaurar">Restaurar padrão</button>
+      </div>
+    </div>
+    <main id="palco"></main>
+  </div>
+</div>
+
+<!-- GAVETA DE IA -->
+<div class="veu" id="veu"></div>
+<aside class="gaveta" id="gaveta" aria-hidden="true" aria-label="Gerar texto com IA">
+  <div class="gaveta-cab">
+    <div>
+      <h3 id="gav-h3">Gerar texto com IA</h3>
+      <p id="gav-p">Escreve a narrativa de um slide a partir dos números que você editou.</p>
+    </div>
+    <button class="fechar" id="bt-fechar-ia" aria-label="Fechar painel">✕</button>
+  </div>
+  <div class="gaveta-corpo">
+    <div class="ctl">
+      <label for="ia-provedor" id="lbl-provedor">Provedor</label>
+      <select id="ia-provedor">
+        <option value="gemini">Google Gemini</option>
+        <option value="deepseek">DeepSeek via Nous</option>
+      </select>
+    </div>
+    <div class="ctl">
+      <label for="ia-modelo" id="lbl-modelo">Modelo</label>
+      <select id="ia-modelo"></select>
+    </div>
+    <div class="ctl">
+      <label for="ia-chave" id="lbl-chave">Chave de API</label>
+      <input type="password" id="ia-chave" placeholder="cole aqui a sua chave" autocomplete="off" spellcheck="false">
+      <p class="chave-nota" id="chave-nota">A chave fica só na memória desta aba, não é salva em lugar nenhum e some quando você fecha a página. Ao rodar em servidor próprio, prefira ler de <code>.env</code> no backend.</p>
+    </div>
+    <div class="ctl">
+      <label for="ia-alvo" id="lbl-alvo">Slide de destino</label>
+      <select id="ia-alvo"></select>
+    </div>
+    <div class="ctl">
+      <label for="ia-prompt" id="lbl-instrucao">Instrução</label>
+      <textarea id="ia-prompt" rows="5"></textarea>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="bt bt-p" id="bt-gerar">Gerar texto</button>
+      <button class="bt" id="bt-rascunho">Rascunho local (sem chave)</button>
+    </div>
+    <div id="ia-estado"></div>
+    <div id="ia-saida" class="saida-ia" hidden></div>
+    <div id="ia-acoes" hidden style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+      <button class="bt bt-p" id="bt-inserir">Inserir no slide</button>
+      <button class="bt" id="bt-copiar">Copiar</button>
+    </div>
+  </div>
+</aside>
+
+<input type="file" id="arquivo-import" accept="application/json" hidden>
+<input type="file" id="foto-sitio-input" accept="image/*" hidden>
+
+<script type="application/json" id="dados-custos">
+{
+  "moeda": "BRL",
+  "custos_diretos": [
+    {"item": "Peso Brutal (limpeza pesada) — Turma 1", "dias": 2, "custo": 600, "nota": "R$150/dia; inclui forno antigo + parte T2 madeira. Risco: 5-6 árvores na rede elétrica"},
+    {"item": "Ranch (bioconstrução) — Thiago + Ronaldo", "dias": 1, "maquina_horas": 3, "custo": 1200, "nota": "Máquina R$400/h confirmado"},
+    {"item": "Estufa 96 m² (fábrica SP)", "custo": 14900, "nota": "frete grátis; plástico agrícola + tela concreto"},
+    {"item": "Estufa montagem (Turma 1)", "dias": 3, "custo": 600, "nota": "2-3 dias; irrigação+bombas completam em 3"},
+    {"item": "Brete (cerca d'água p/ carrapato)", "dias": 2, "custo": null, "nota": "T2 1d + T1 1d + Thiago; a definir"},
+    {"item": "Chalés Hobbit (madeira caída) — Turma 2", "custo": null, "nota": "a definir"},
+    {"item": "Área produtiva 1,5 ha (desenho urgente)", "custo": null, "nota": "vegetação no limite de supressão"},
+    {"item": "Implantação e inventário do pomar", "dias": 4, "custo": null, "nota": "frutíferas existentes + adicionais; valor a definir"},
+    {"item": "Perlita expandida — 750 L", "custo": 2059.13, "nota": "7,5 sacos de 100 L × R$ 274,55 · Shopee · preço consultado em 20/08/2026, frete não incluso"},
+    {"item": "Vermiculita expandida — 450 L", "custo": 877.05, "nota": "4,5 sacos de 100 L × R$ 194,90 · Leroy Merlin · preço consultado em 20/08/2026, frete não incluso"},
+    {"item": "Húmus de minhoca — 540 kg", "custo": 603.72, "nota": "27 sacos de 20 kg × R$ 22,36 · BomCultivo · preço consultado em 20/08/2026, frete não incluso"},
+    {"item": "Micorrizas inoculante 100% — 750 g", "custo": 1335, "nota": "7,5 potes de 100 g × R$ 178,00 · TerraFarm/Mercado Livre · não comparar com adubo apenas enriquecido"},
+    {"item": "Bokashi — 150 kg", "custo": 427.28, "nota": "7,5 sacos de 20 kg × R$ 56,97 · Mercado Livre · preço consultado em 20/08/2026, frete não incluso"},
+    {"item": "Calda Bordalesa preventiva — 3 L", "custo": 153.90, "nota": "3 unidades de 1 L × R$ 51,30 · Shopee · preço consultado em 20/08/2026, frete não incluso"},
+    {"item": "Solo/composto base — 540 kg", "custo": 699.30, "nota": "27 sacos de 20 kg × R$ 25,90 · Gold Plant · preço consultado em 20/08/2026, frete não incluso"},
+    {"item": "Biofertilizante", "custo": null, "nota": "será produzido no sítio; sem custo de compra"}
+  ],
+  "folha_clt": {
+    "encargos_percentual": "43,5%",
+    "valores_base": {"funcionario_fixo": 2210, "diaria_limpeza": 150, "rocoadeira": 200, "servico_geral": 150},
+    "configuracoes": {
+      "A": {"descricao": "ideal — 2 de campo + 1 limpeza/animais (3 fixos)", "fixos": 3},
+      "B": {"descricao": "enxuta — 1 fixo + esporádicos", "fixos": 1, "rocoadeira_serv": 4, "diaria_limpeza_serv": 2},
+      "C": {"descricao": "mínima — 1 fixo + reforma estufa antiga ~1500", "fixos": 1, "capital_extra": 1500, "desconta_estufa_nova": 14900}
+    }
+  },
+  "canais_comercializacao": [
+    {"canal": "PNAE (Escola)", "base_legal": "Lei 11.947/2009", "retorno": "~3 meses p/ 1ª venda; contrato p/ próximo ano", "nota": "sem concorrência na região"},
+    {"canal": "Mercados locais", "base_legal": "venda direta", "retorno": "imediato"},
+    {"canal": "Produtos valor agregado", "base_legal": "geleias (linha irmão Gabriel) + derivados", "retorno": "médio prazo"}
+  ],
+  "producao": {
+    "base": "plantas aromáticas/medicinais",
+    "frutas": ["morango","maracujá","manga","jabuticaba","amora","cambuci","physalis"],
+    "areas_ha": {"produtiva_urgente": 1.5, "manejo_facil": 5.0, "capoeira_percent": 80}
+  }
+}
+</script>
+
+<script type="application/json" id="dados-crono">
+{
+  "inicio": "2026-08-15",
+  "fim": "2027-02-15",
+  "fases": [
+    {"mes": "M1", "periodo": "15/08–15/09", "fase": "F1", "foco": "Peso Brutal + madeira; Ranch; desenho área 1,5 ha"},
+    {"mes": "M2", "periodo": "15/09–15/10", "fase": "F2", "foco": "Brete; terreno máquinas; pedido estufa"},
+    {"mes": "M3", "periodo": "15/10–15/11", "fase": "F3", "foco": "estufa montada + plantio inicial"},
+    {"mes": "M4", "periodo": "15/11–15/12", "fase": "F3/F4", "foco": "estufa produzindo; ~3 meses → primeiras vendas"},
+    {"mes": "M5", "periodo": "15/12–15/01", "fase": "—", "foco": "chalés; expansão área; PNAE próximo ano"},
+    {"mes": "M6", "periodo": "15/01–15/02", "fase": "6M", "foco": "marcos finais + inventário familiar"}
+  ],
+  "marcos_validacao": {
+    "F1": "terreno limpo + moradia habitável + madeira processada",
+    "F2": "éguas tratadas (carrapato zerado) + terreno nivelado p/ estufa + platô definido",
+    "F3": "estufa montada, irrigação e biofertilizante operando",
+    "F4": "roçada em dia em áreas-projeto; estufa com manejo diário registrado"
+  }
+}
+</script>
+
+<script>
+/* =========================================================================
+   Guajupiá — Dossiê de Transição e Investimento
+   App de página única. Sem build, sem dependências.
+   Os dados vivem em memória; exporte/importe JSON para persistir.
+   ========================================================================= */
+
+/* ---------- 1. ESTADO ---------- */
+
+const CUSTOS_EMBUTIDO = JSON.parse(document.getElementById('dados-custos').textContent);
+const CRONO_EMBUTIDO  = JSON.parse(document.getElementById('dados-crono').textContent);
+
+function estadoPadrao(custos, crono) {
+  return {
+    projeto: {
+      nome: 'Guajupiá',
+      lema: 'Seis meses para transformar terreno bruto em unidade produtiva agroecológica.',
+      inicio: crono.inicio,
+      fim: crono.fim,
+      responsaveis: [
+        { papel: 'Coordenação', nome: 'Família Guajupiá' },
+        { papel: 'Campo', nome: 'Turma 1 · Adriano + Jorge' },
+        { papel: 'Madeira', nome: 'Turma 2 · Wellington' },
+        { papel: 'Máquinas e obra', nome: 'Ronaldo' }
+      ]
+    },
+
+    equipe: [
+      { cod: 'T1', nome: 'Turma 1 — Adriano + Jorge', frente: 'Campo', papel: 'Limpeza pesada, montagem da estufa, roçada semanal e manejo diário.' },
+      { cod: 'T2', nome: 'Turma 2 — Wellington + ajudante', frente: 'Madeira', papel: 'Processamento da madeira do corte, marcenaria, chalés.' },
+      { cod: 'RN', nome: 'Ronaldo', frente: 'Máquinas e obra', papel: 'Terraplenagem, estufa, chalés e platô. Máquina cobrada por hora.' },
+      { cod: 'TH', nome: 'Thiago', frente: 'Bioconstrução', papel: 'Ranch e brete, junto com Ronaldo e a Turma 2.' },
+      { cod: 'MN', nome: 'Mainha', frente: 'Eventos', papel: 'Concepção e uso do platô de eventos.' },
+      { cod: 'GB', nome: 'Gabriel', frente: 'Valor agregado', papel: 'Linha de geleias e derivados — canal de maior margem.' }
+    ],
+
+    estruturas: [
+      { cod: 'a.1', titulo: 'Limpeza pesada', detalhe: 'Árvores caídas, entulho, forno antigo, roçada inicial.', resp: 'Turma 1', status: 'pendente' },
+      { cod: 'a.2', titulo: 'Finalizar moradia', detalhe: 'Deixar a casa habitável para a mudança.', resp: 'Thiago / T2', status: 'pendente' },
+      { cod: 'a.3', titulo: 'Processar madeira do corte', detalhe: 'Transformar o corte em material de construção.', resp: 'Turma 2', status: 'pendente' },
+      { cod: 'a.4', titulo: 'Brete para as éguas', detalhe: 'Cerca de água contra carrapato. Sanidade antes do manejo.', resp: 'T1 + T2 + Thiago', status: 'pendente' },
+      { cod: 'a.5', titulo: 'Terreno de máquinas e platô', detalhe: 'Nivelamento para a estufa e definição do platô de eventos.', resp: 'Ronaldo', status: 'pendente' },
+      { cod: 'a.6', titulo: 'Montagem da estufa (96 m²)', detalhe: 'Estrutura de fábrica em SP, montada em 2 a 3 dias.', resp: 'Turma 1', status: 'pendente' },
+      { cod: 'a.7', titulo: 'Irrigação e biofertilizante', detalhe: 'Bombas, linhas e rotina de manejo registrada.', resp: 'Turma 1', status: 'pendente' },
+      { cod: 'a.8', titulo: 'Roçar áreas produtivas', detalhe: 'Manter em dia as áreas do projeto.', resp: 'Turma 1', status: 'pendente' },
+      { cod: 'a.9', titulo: 'Chalés Hobbit', detalhe: 'Construídos com a madeira caída. Receita futura de hospedagem.', resp: 'Turma 2', status: 'pendente' }
+    ],
+
+    rotinas: [
+      { frequencia: 'Diária', acao: 'Cuidado dos animais', detalhe: 'Água, alimentação, observação de saúde e limpeza dos espaços.', resp: 'Responsável pelos animais', status: 'iniciar' },
+      { frequencia: 'Diária / conforme necessidade', acao: 'Sanidade animal', detalhe: 'Banhos e controle de carrapatos e pulgas, incluindo o acompanhamento das éguas.', resp: 'Responsável pelos animais + Thiago', status: 'iniciar' },
+      { frequencia: 'Diária', acao: 'Manejo dos plantios em implantação', detalhe: 'Irrigação, observação e cuidados das medicinais, aromáticas, hortas e frutíferas durante o período de formação.', resp: 'Turma 1', status: 'iniciar' },
+      { frequencia: 'Semanal', acao: 'Roçada das áreas do projeto', detalhe: 'Uma turma por semana, evitando que a vegetação espontânea passe do ponto de corte.', resp: 'Adriano + Jorge', status: 'iniciar' },
+      { frequencia: '4 dias de serviço', acao: 'Implantar e inventariar o pomar', detalhe: 'Organizar as frutíferas existentes e adicionais; priorizar as de entrada mais rápida, como morango e physalis, mantendo a amora no planejamento de médio prazo.', resp: 'Adriano + Jorge + Thiago', status: 'iniciar' },
+      { frequencia: 'Ao longo de 6 meses', acao: 'Consolidar o sistema produtivo', detalhe: 'Estruturar medicinais, aromáticas, hortas e frutíferas. O semestre marca o início da consolidação, não o fim do manejo.', resp: 'Turma 1 + Thiago', status: 'iniciar' }
+    ],
+
+    cronograma: {
+      inicio: crono.inicio || CRONO_EMBUTIDO.inicio,
+      fim: crono.fim || CRONO_EMBUTIDO.fim,
+      fases: JSON.parse(JSON.stringify(crono.fases || CRONO_EMBUTIDO.fases)),
+      marcos_validacao: JSON.parse(JSON.stringify(crono.marcos_validacao || CRONO_EMBUTIDO.marcos_validacao))
+    },
+    marcosFeitos: {},
+
+    custos: (custos.custos_diretos || CUSTOS_EMBUTIDO.custos_diretos).map(c => ({
+      item: c.item,
+      dias: c.dias ?? null,
+      custo: c.custo ?? null,
+      nota: c.nota || ''
+    })),
+
+    folha: {
+      encargosPct: 43.5,
+      valoresBase: { funcionarioFixo: 2210, diariaLimpeza: 150, rocoadeira: 200, servicoGeral: 150 },
+      A: {
+        rotulo: 'Configuração A — ideal',
+        equipe: '2 funcionários de campo + 1 para limpeza e animais',
+        fixos: 3, rocoadeiraServ: 0, diariaLimpezaServ: 0, capitalExtra: 0, descontaEstufaNova: 0
+      },
+      B: {
+        rotulo: 'Configuração B — enxuta',
+        equipe: '1 funcionário fixo + ajudante esporádico no campo + limpeza a cada 15 dias',
+        fixos: 1, rocoadeiraServ: 4, diariaLimpezaServ: 2, capitalExtra: 0, descontaEstufaNova: 0
+      },
+      C: {
+        rotulo: 'Configuração C — mínima',
+        equipe: '1 funcionário fixo + estrutura parcial temporária (reforma da estufa antiga, ~R$1.500)',
+        fixos: 1, rocoadeiraServ: 0, diariaLimpezaServ: 0, capitalExtra: 1500, descontaEstufaNova: 14900
+      }
+    },
+
+    invest: {
+      cenario: 'B',
+      reservaGiro: 15000,
+      capitalManual: null,
+      receitaPlena: 8500,
+      mesInicioReceita: 4,
+      mesesRampa: 3,
+      horizonte: 24
+    },
+
+    valuation: {
+      fatorConservacao: 1,
+      valorTerreno: 0,
+      multiplo: 4,
+      taxaDesconto: 12,
+      crescimento: 3,
+      anos: 10
+    },
+
+    producao: JSON.parse(JSON.stringify(custos.producao || CUSTOS_EMBUTIDO.producao)),
+    canais: JSON.parse(JSON.stringify(custos.canais_comercializacao || CUSTOS_EMBUTIDO.canais_comercializacao)),
+
+    riscos: [
+      { risco: 'Cinco a seis árvores sobre a rede elétrica', impacto: 'alto', acao: 'Acionar a concessionária antes de qualquer derrubada. Não é serviço de turma.' },
+      { risco: 'Área de 1,5 ha no limite de supressão de vegetação', impacto: 'alto', acao: 'Fechar o desenho da área e checar se exige autorização ambiental.' },
+      { risco: 'PNAE leva cerca de 3 meses até a primeira venda', impacto: 'alto', acao: 'O caixa precisa aguentar o intervalo. Ver reserva de giro na seção 09.' },
+      { risco: 'Brete e chalés ainda sem orçamento', impacto: 'médio', acao: 'Orçar antes do M2. Enquanto isso o capital inicial está subestimado.' },
+      { risco: 'Carrapatos e pulgas nos animais, incluindo as éguas', impacto: 'alto', acao: 'Iniciar já a rotina sanitária; registrar banhos, inspeções e tratamentos, sem esperar a conclusão do brete.' },
+      { risco: 'Rotinas recorrentes ficarem subordinadas às obras', impacto: 'alto', acao: 'Reservar responsáveis e frequência fixa para animais, irrigação, plantios e roçada semanal.' },
+      { risco: 'Máquina a R$ 400/hora', impacto: 'médio', acao: 'Controlar horas por serviço. Três horas já custam mais que dois dias de turma.' },
+      { risco: 'Encargos CLT de 42% a 45%', impacto: 'alto', acao: 'A escolha entre cenário A e B muda o ponto de equilíbrio em anos.' }
+    ],
+
+    decisoes: [
+      'Orçar o brete e os chalés Hobbit.',
+      'Fechar o desenho da área produtiva de 1,5 ha.',
+      'Decidir entre cenário de folha A e B.',
+      'Confirmar fornecedor e prazo da estufa de 96 m².',
+      'Abrir o cadastro para o PNAE com antecedência do contrato do ano seguinte.'
+    ],
+
+    narrativas: {},
+
+    fotoSitio: null,
+
+    idioma: 'pt',
+    taxaUSD: 5.40
+  };
+}
+
+let estado = estadoPadrao(CUSTOS_EMBUTIDO, CRONO_EMBUTIDO);
+let secaoAtual = 0;
+
+/* ---------- 2. FORMATAÇÃO ---------- */
+
+const pct = n => (Math.round(n * 10) / 10).toLocaleString('pt-BR') + '%';
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+/* ============ i18n Guajupiá ============ */
+const I18N = {
+  pt: {
+    "t_ia":"Gerar texto com IA","t_import":"Importar dados","t_export":"Exportar dados","t_print":"Imprimir / PDF","t_restore":"Restaurar padrão","t_idioma":"EN",
+    "m_sigla":"Dossiê · 2026–2027","m_sub":"Implantação agroecológica<br>Seis meses de execução","rail_pe":"15/08/2026 → 15/02/2027<br>Todos os números são editáveis.","indice_aria":"Seções do dossiê",
+    "gav_h3":"Gerar texto com IA","gav_p":"Escreve a narrativa de um slide a partir dos números que você editou.","lbl_provedor":"Provedor","lbl_modelo":"Modelo","lbl_chave":"Chave de API","ph_chave":"cole aqui a sua chave","chave_nota":"A chave fica só na memória desta aba, não é salva em lugar nenhum e some quando você fecha a página. Ao rodar em servidor próprio, prefira ler de <code>.env</code> no backend.","lbl_alvo":"Slide de destino","lbl_instrucao":"Instrução","bt_gerar":"Gerar texto","bt_rascunho":"Rascunho local (sem chave)","bt_inserir":"Inserir no slide","bt_copiar":"Copiar",
+    "capa_topo1":"Dossiê de implantação e investimento","capa_topo2":"15/08/2026 → 15/02/2027 · 6 meses","capa_capital_label":"Capital inicial","resumo_h3":"Situação atual",
+    "resumo_txt":"O projeto visa transformar o sítio Guajupiá em uma unidade agroecológica e uma associação de cuidados com os animais, seres humanos e o meio ambiente. Cuidamos do sítio há quase 18 anos. Hoje há uma área ativa de cinco hectares disponível para o projeto. A proposta é seis meses de obra estrutural e trabalho agrícola em plantações, com produção de plantas aromáticas e medicinais, e sistemas agroflorestais com foco em frutíferas nativas.",
+    "capa_desc":"Seis meses de obra estrutural e trabalho agrícola em plantações, com produção de plantas aromáticas e medicinais, e sistemas agroflorestais com foco em frutíferas nativas. Cuidamos do sítio há quase 18 anos e há uma área ativa de cinco hectares disponível para o projeto. Este documento serve tanto para a família decidir quanto para apresentar a parceiros e investidores.",
+    "prop_intro":"O projeto estrutura a <strong>manutenção do sítio</strong> e a <strong>produção de plantas aromáticas e medicinais</strong>, somadas a fruticultura. Três razões sustentam a decisão.",
+    "prop_m1":"Saúde da família","prop_m2":"Renda","prop_m3":"Agroecologia",
+    "prop_mudatit":"O que muda em seis meses","prop_mudatxt":"Sai um terreno com entulho, árvores caídas, capoeira em 80% da área e éguas com carrapato. Entra uma unidade com moradia terminada, estufa de 96 m² irrigada, brete funcionando, 1,5 ha desenhados para produção e madeira do corte já processada em material de construção.",
+    "prop_aviso":"Toda a numeração deste dossiê pode ser alterada nas seções seguintes",
+    "eq_intro":"Quatro frentes com responsáveis nomeados. A divisão importa porque o custo da mão de obra muda de natureza em cada uma: turma por diária, máquina por hora, marcenaria por entrega.",
+    "eq_remover":"remover","eq_add":"+ Adicionar pessoa",
+    "est_intro":"Nove ações de implantação e obra, de a.1 a a.9. Marque o andamento aqui e a barra abaixo acompanha.","est_cod":"Cód","est_frente":"Frente","est_resp":"Responsável","est_and":"Andamento",
+    "est_pend":"Pendente","est_andamento":"Em andamento","est_concl":"Concluída","est_ph":"[imagem: brete, estufa e chalé hobbit]",
+    "rot_intro":"As obras têm começo e fim; estas ações sustentam o sítio durante toda a transição. Animais, sanidade, irrigação e roçada precisam começar já e continuar enquanto os sistemas produtivos se formam.",
+    "rot_freq":"Frequência","rot_acao":"Ação","rot_resp":"Responsável","rot_sit":"Situação","rot_iniciar":"A iniciar","rot_ativa":"Rotina ativa","rot_paus":"Pausada",
+    "rot_cod":"Avaliação operacional","rot_h4":"Seis meses iniciam a consolidação","rot_txt":"Medicinais, aromáticas, hortas e parte das frutíferas começam a responder ao longo do semestre, mas o sistema seguirá exigindo manejo. Entre as frutíferas, morango e physalis podem entrar antes; amora e as espécies perenes permanecem como produção de médio e longo prazo.",
+    "cro_intro":"Seis meses divididos em fases, com marcos que dizem quando cada etapa pode ser considerada fechada.",
+    "cro_ini":"Início do cronograma","cro_fim":"Fim do cronograma","cro_marcos":"Marcos de validação","cro_marcosnota":"Marque quando o critério for verdadeiro em campo, não quando o serviço começar.",
+    "cro_fase":"Fase","cro_criterio":"Critério de encerramento","cro_valid":"Validado","cro_aviso":"Datas, meses, períodos, fases, focos e critérios dos marcos são editáveis",
+    "cro_nota":"Regra de ouro do cronograma: a estufa só começa a gerar receita cerca de três meses depois do plantio. É por isso que a receita, na seção 09, começa no mês 4 por padrão.",
+    "cus_intro":"Custos diretos de implantação. Os campos em branco são serviços ainda sem orçamento — enquanto ficarem vazios, o capital inicial está subestimado.",
+    "cus_custo_hdr":"Custo","cus_dias":"Dias","cus_total":"Total orçado","cus_itens":"itens ainda sem valor","cus_item1":"item ainda sem valor","cus_add":"+ Adicionar item","cus_baixar":"Baixar custos.json","cus_aviso":"Sem orçamento","cus_excluir":"excluir",
+    "cus_aviso2":"Editar qualquer célula recalcula o capital inicial, o payback e o valor do negócio",
+    "fol_intro":"Três configurações de equipe e estrutura. A folha CLT leva encargos de {enc} sobre o salário bruto de R$ 2.210. Os serviços esporádicos (roçadeira e limpeza) são pagos por diária, fora da folha.",
+    "fol_enc":"Encargos sobre o bruto (%)","fol_sal":"Salário do funcionário fixo (R$)","fol_comp":"Comparativo automatizado","fol_compnota":"Todos os valores abaixo são recalculados a partir dos campos acima e das obras da seção 06.",
+    "fol_item":"Item","fol_A":"Config. A","fol_B":"Config. B","fol_C":"Config. C","fol_fixos":"Funcionários fixos (CLT)","fol_roco":"Serviço de campo (roçadeira)","fol_limpeza":"Diárias de limpeza (15 em 15d)","fol_capExtra":"Capital extra de implantação","fol_custoMes":"Custo mensal (folha + serviços)","fol_custoRec":"Custo mensal recorrente","fol_adjEst":"Ajuste de capital de implantação (estufa)","fol_capIni":"Capital inicial estimado",
+    "fol_leitura":"Leitura","fol_leituraTxt":"A Configuração A tem o custo mensal mais alto, mas é a única com duas pessoas dedicadas ao campo desde o início. A C troca a estufa nova de R$ 14.900 pela reforma da antiga (~R$ 1.500), o que reduz o capital de implantação em {dif} — mas adia a produção em estufa. A B é o meio-termo usado como padrão na seção 09. Escolha o cenário lá para ver o perfil de caixa.",
+    "prd_intro":"A base produtiva são <strong>{base}</strong>, complementada por fruticultura de ciclo escalonado.","prd_frut":"Fruticultura","prd_areas":"Áreas","prd_prior":"Prioridade","prd_exp":"Expansão","prd_atual":"Estado atual","prd_canais":"Canais de comercialização","prd_base":"Canal","prd_ret":"Base","prd_prazo":"Prazo de retorno","prd_nota":"O PNAE é o canal de maior volume e o mais lento a pagar. Mercados locais entram como caixa imediato enquanto o contrato não sai. Os derivados do Gabriel são a linha de maior margem e a que menos depende de safra.",
+    "inv_intro":"O modelo abaixo roda mês a mês: gasta o capital de uma vez no início, paga folha e manutenção desde o primeiro mês e só começa a receber quando a estufa produz.",
+    "inv_cen":"Cenário de folha","inv_resGiro":"Reserva de giro","inv_capManual":"Capital inicial — deixe vazio para somar obras + giro","inv_recPlena":"Receita mensal em regime pleno","inv_mes1":"Mês da primeira venda","inv_rampa":"Meses até a receita cheia","inv_horiz":"Horizonte da projeção (meses)",
+    "inv_capInicial":"Capital inicial","inv_retorno":"Retorno do capital","inv_caixa":"Caixa necessário","inv_result":"Resultado no horizonte","inv_custoFixo":"Custo mensal fixo","inv_equilibrio":"Receita de equilíbrio","inv_margem":"Margem em regime pleno","inv_roi":"Retorno sobre o capital",
+    "inv_perfil":"Perfil do caixa acumulado","inv_abaixo":"abaixo do nível = capital ainda enterrado","inv_legAcima":"acima do nível zero: lucro","inv_legAbaixo":"abaixo: capital a recuperar","inv_legEmerg":"ponto de emergência","inv_mesMes":"Mês a mês",
+    "inv_nota":"O modelo é de caixa, não contábil. Não considera imposto, depreciação nem o valor da terra. Para negociação com terceiros, some o parecer de um contador.",
+    "inv_taxa":"Câmbio (BRL por USD)","inv_taxaNota":"Usado para exibir os valores em dólar no modo inglês.",
+    "val_intro":"Três formas de estimar quanto vale o empreendimento. Nenhuma é a resposta certa sozinha — a faixa entre elas é a informação útil numa conversa com sócio, banco ou comprador.",
+    "val_m1":"Método 01","val_m1t":"Custo de reposição","val_m1d":"O que custaria refazer as benfeitorias hoje. É o piso da negociação.","val_m2":"Método 02","val_m2t":"Múltiplo de resultado","val_m2d":"Resultado anual em regime pleno vezes um múltiplo. Pequeno negócio rural costuma girar entre 3× e 5×.","val_m3":"Método 03","val_m3t":"Fluxo descontado","val_m3d":"Traz o resultado dos próximos anos para o valor de hoje, com taxa de desconto e crescimento.",
+    "val_fator":"Fator de conservação","val_terra":"Valor da terra (R$)","val_anual":"Resultado anual","val_mult":"Múltiplo","val_anos":"Anos projetados","val_taxa":"Taxa de desconto (%)","val_cresc":"Crescimento anual (%)",
+    "val_atencao":"Atenção","val_atencaoTxt":"Com os números atuais o resultado anual é zero ou negativo, então os métodos 02 e 03 não produzem valor. Só o custo de reposição sustenta a avaliação. Ajuste receita ou custo mensal na seção 09.",
+    "val_faixa":"Faixa de valor","val_piso":"Piso","val_ref":"Referência","val_teto":"Teto","val_nota":"Enquanto brete e chalés estiverem sem orçamento, o método 01 está abaixo do real. E enquanto a receita for projeção e não histórico, os métodos 02 e 03 são hipótese — ganham peso depois das primeiras vendas registradas.",
+    "ris_intro":"O que pode travar o cronograma ou estourar o caixa, com a ação correspondente.","ris_risco":"Risco","ris_impacto":"Impacto","ris_acao":"Ação","ris_decisoes":"Decisões em aberto","ris_prox":"Próximo passo","ris_proxH4":"Fechar os dois orçamentos em aberto antes do M2","ris_proxTxt":"Brete e chalés são os únicos itens que ainda deslocam o capital inicial. Com eles definidos, o perfil de caixa da seção 09 vira base de decisão e não estimativa.",
+    "nav_ant":"Anterior","nav_prox":"Próxima",
+    "alert_import":"Não foi possível ler esse arquivo. Ele precisa ser um JSON exportado por este app ou no formato de custos.json / cronograma.json.",
+    "confirm_restore":"Isso descarta todas as edições desta sessão e volta aos números originais do pacote. Continuar?",
+    "ia_sem_chave":"Cole a chave de API para gerar. Sem chave, use o rascunho local ao lado.","ia_gerando":"Gerando…","ia_pronto":"Texto pronto. Revise antes de inserir no slide.","ia_copiou":"Copiado.","ia_copiarbloq":"O navegador bloqueou a cópia. Selecione o texto e copie na mão.","ia_rascunho":"Rascunho montado a partir dos seus números, sem chamar nenhum modelo.","ia_inserido":"Texto inserido no slide",
+    "mp_intro":"Escreva a narrativa do slide \"{tit}\" do dossiê do projeto Guajupiá.\nPúblico: família, parceiros e possíveis investidores. Tom sério, rural, direto, sem jargão de startup.\nPortuguês do Brasil. De 2 a 3 parágrafos curtos, texto corrido, sem títulos nem marcadores.\n\nDados do projeto:\n{ctx}",
+    "ctx1":"Projeto Guajupiá — implantação agroecológica, 15/08/2026 a 15/02/2027.","ctx2":"Produção: {base}; fruticultura de {frutas}.","ctx3":"Área produtiva prioritária: {ha} ha. Estufa de 96 m².","ctx4":"Capital inicial: {cap}. Custo mensal fixo: {cm} (cenário {cen}).","ctx5":"Receita cheia prevista: {rec}/mês a partir do mês {m}.","ctx6":"Retorno do capital: {pb}. Caixa mais baixo: {cx}.","ctx7":"Valor de referência do negócio: {val}.","ctx8":"Canais: {canais}.",
+    "draft_capa":"O projeto Guajupiá transforma um terreno em capoeira numa unidade produtiva agroecológica em seis meses, entre 15 de agosto de 2026 e 15 de fevereiro de 2027. O capital de implantação previsto é de {cap}.\n\nA produção se organiza em torno de plantas aromáticas e medicinais e fruticultura, com uma estufa de 96 m² como núcleo do sistema. O retorno do capital está projetado para {pb}.",
+    "draft_proposito":"A decisão de estruturar a produção no terreno não é de estilo de vida, é de estrutura. A família passa a produzir o próprio alimento e gerar renda a partir de um sistema agroecológico que hoje não tem concorrência na região.\n\nOs três canais de venda têm prazos diferentes de propósito. Mercado local paga na hora, o PNAE paga em escala mas demora, e os derivados sustentam a margem. Juntos, seguram o caixa nos meses em que a estufa ainda está formando.",
+    "draft_equipe":"A execução se divide em quatro frentes com responsáveis nomeados, porque cada uma tem uma lógica de custo própria: turma cobra por diária, máquina cobra por hora, marcenaria cobra por entrega.\n\nEssa separação evita o erro mais caro de obra rural, que é pagar hora de máquina para fazer serviço de turma.",
+    "draft_estruturas":"São nove frentes de obra, de a.1 a a.9, que vão da limpeza pesada até os chalés construídos com a madeira do próprio corte. A sequência não é negociável: sem terreno limpo não há nivelamento, sem nivelamento não há estufa, sem estufa não há receita.\n\nA madeira derrubada deixa de ser entulho e vira material de construção, o que reduz o custo dos chalés e do brete.",
+    "draft_cronograma":"O plano de seis meses é escalonado em fases F1 a F4, cada uma com um critério objetivo de encerramento. Uma fase só fecha quando o critério é verdadeiro em campo, não quando o serviço começou.\n\nO ponto crítico está entre o mês 3 e o mês 4: a estufa montada leva cerca de três meses até a primeira colheita vendável. Esse intervalo é o que define o tamanho da reserva de giro.",
+    "draft_custos":"O investimento direto de implantação soma {tot} nos itens já orçados. A estufa de 96 m² concentra a maior parte desse valor e vem de fábrica em São Paulo, com frete incluso.\n\nBrete e chalés seguem sem orçamento fechado. Enquanto isso não se resolve, o capital inicial deste dossiê está subestimado e deve ser tratado como piso, não como número final.",
+    "draft_rotina":"A transição precisa separar as ações de estruturação das rotinas que sustentam o sítio todos os dias. Animais, sanidade, irrigação e observação dos plantios começam imediatamente; a roçada das áreas do projeto fica programada uma vez por semana com Adriano e Jorge.\n\nO pomar tem quatro dias de serviço previstos para implantação e inventário das frutíferas existentes e adicionais. O horizonte de seis meses representa o começo da consolidação das medicinais, aromáticas, hortas e frutíferas, e não o encerramento do manejo.",
+    "draft_folha":"A folha é a maior alavanca de caixa do projeto. Com encargos de {enc} sobre o bruto, a Configuração A custa {fa} por mês, a B {fb} e a C {fc}.\n\nA diferença anual entre a A e a B é maior que o custo da estufa. Começar por uma configuração mais enxuta e migrar para a ideal depois das primeiras vendas registradas é o caminho de menor risco. A C troca a estufa nova pela reforma da antiga e reduz o capital de implantação em {dif}.",
+    "draft_producao":"A base produtiva são plantas aromáticas e medicinais, somadas a uma fruticultura de ciclos escalonados, do morango ao cambuci.\n\nA prioridade é 1,5 hectare com desenho urgente, dentro de uma propriedade que ainda está 80% em capoeira. A expansão para os 5 hectares de manejo fácil só entra depois que a primeira área estiver produzindo.",
+    "draft_investimento":"Com capital inicial de {cap} e custo mensal fixo de {cm}, o projeto precisa de uma receita de {eq} por mês apenas para empatar. A receita cheia prevista é de {rec}.\n\nO caixa desce até {cx} antes de começar a subir. Esse é o número que precisa estar efetivamente disponível, e não o capital inicial isolado. {pb_txt}",
+    "draft_valor":"Os três métodos entregam uma faixa entre {min} e {max}, com referência em {ref}. O custo de reposição das benfeitorias funciona como piso e é o único método ancorado em valor já realizado.\n\nMúltiplo de resultado e fluxo descontado dependem de uma receita que ainda é projeção. Ganham peso de verdade depois das primeiras vendas registradas em nota.",
+    "draft_riscos":"Três riscos concentram a maior parte da exposição: as árvores sobre a rede elétrica, que exigem a concessionária antes de qualquer derrubada; a área de 1,5 hectare no limite de supressão de vegetação; e o intervalo de três meses até a primeira venda pelo PNAE.\n\nOs dois orçamentos em aberto, brete e chalés, são a decisão mais urgente. Enquanto não fecharem, todo número de retorno deste dossiê é estimativa e não base de decisão."
+  },
+  en: {
+    "t_ia":"Generate text with AI","t_import":"Import data","t_export":"Export data","t_print":"Print / PDF","t_restore":"Restore default","t_idioma":"PT",
+    "m_sigla":"Dossier · 2026–2027","m_sub":"Agroecological deployment<br>Six months of execution","rail_pe":"15/08/2026 → 15/02/2027<br>All figures are editable.","indice_aria":"Dossier sections",
+    "gav_h3":"Generate text with AI","gav_p":"Writes the narrative of a slide from the numbers you edited.","lbl_provedor":"Provider","lbl_modelo":"Model","lbl_chave":"API key","ph_chave":"paste your key here","chave_nota":"The key stays only in this tab's memory, is not saved anywhere and disappears when you close the page. When running on your own server, prefer reading it from <code>.env</code> on the backend.","lbl_alvo":"Target slide","lbl_instrucao":"Instruction","bt_gerar":"Generate text","bt_rascunho":"Local draft (no key)","bt_inserir":"Insert into slide","bt_copiar":"Copy",
+    "capa_topo1":"Implementation and investment dossier","capa_topo2":"15/08/2026 → 15/02/2027 · 6 months","capa_capital_label":"Initial capital","resumo_h3":"Current situation",
+    "resumo_txt":"The project aims to turn the Guajupiá site into an agroecological unit and an association of care for animals, human beings and the environment. We have cared for the site for nearly 18 years. Today there is an active area of five hectares available for the project. The proposal is six months of structural work and farming, producing aromatic and medicinal plants, and agroforestry systems focused on native fruit trees.",
+    "capa_desc":"Six months of structural work and farming, producing aromatic and medicinal plants, and agroforestry systems focused on native fruit trees. We have cared for the site for nearly 18 years and there is an active area of five hectares available for the project. This document serves both for the family to decide and to present to partners and investors.",
+    "prop_intro":"The project structures <strong>site maintenance</strong> and the <strong>production of aromatic and medicinal plants</strong>, plus fruit growing. Three reasons support the decision.",
+    "prop_m1":"Family health","prop_m2":"Income","prop_m3":"Agroecology",
+    "prop_mudatit":"What changes in six months","prop_mudatxt":"Out goes a plot with rubble, fallen trees, scrub on 80% of the area and mares with ticks. In comes a unit with finished housing, a 96 m² irrigated greenhouse, a working chute, 1.5 ha laid out for production and the cut timber already processed into building material.",
+    "prop_aviso":"All the figures in this dossier can be changed in the following sections",
+    "eq_intro":"Four fronts with named responsibles. The split matters because labor cost changes in nature on each: crew by day rate, machine by hour, carpentry by delivery.",
+    "eq_remover":"remove","eq_add":"+ Add person",
+    "est_intro":"Nine deployment and construction actions, from a.1 to a.9. Mark progress here and the bar below follows.",
+    "est_cod":"Code","est_frente":"Front","est_resp":"Responsible","est_and":"Progress",
+    "est_pend":"Pending","est_andamento":"In progress","est_concl":"Done","est_ph":"[image: chute, greenhouse and hobbit cabin]",
+    "rot_intro":"Construction has a start and an end; these actions sustain the site throughout the transition. Animals, health, irrigation and mowing need to start now and continue while the production systems form.",
+    "rot_freq":"Frequency","rot_acao":"Action","rot_resp":"Responsible","rot_sit":"Status","rot_iniciar":"To start","rot_ativa":"Active routine","rot_paus":"Paused",
+    "rot_cod":"Operational assessment","rot_h4":"Six months begin the consolidation","rot_txt":"Medicinals, aromatics, gardens and part of the fruit trees begin to respond over the semester, but the system will keep demanding management. Among the fruit trees, strawberry and physalis can come in earlier; blackberry and the perennial species remain medium- and long-term production.",
+    "cro_intro":"Six months divided into phases, with milestones that say when each stage can be considered closed.",
+    "cro_ini":"Schedule start","cro_fim":"Schedule end","cro_marcos":"Validation milestones","cro_marcosnota":"Mark when the criterion is true in the field, not when the service started.",
+    "cro_fase":"Phase","cro_criterio":"Closure criterion","cro_valid":"Validated","cro_aviso":"Dates, months, periods, phases, focuses and milestone criteria are editable",
+    "cro_nota":"Golden rule of the schedule: the greenhouse only starts generating revenue about three months after planting. That is why revenue, in section 09, starts in month 4 by default.",
+    "cus_intro":"Direct deployment costs. Blank fields are services still without a budget — while they stay empty, the initial capital is underestimated.",
+    "cus_custo_hdr":"Cost","cus_dias":"Days","cus_total":"Budgeted total","cus_itens":"items still without value","cus_item1":"item still without value","cus_add":"+ Add item","cus_baixar":"Download costs.json","cus_aviso":"No budget","cus_excluir":"delete",
+    "cus_aviso2":"Editing any cell recalculates initial capital, payback and business value",
+    "fol_intro":"Three team and structure configurations. The CLT payroll carries charges of {enc} on the gross salary of R$ 2,210. Occasional services (mower and cleaning) are paid per day, outside the payroll.",
+    "fol_enc":"Charges on gross (%)","fol_sal":"Fixed worker salary","fol_comp":"Automated comparison","fol_compnota":"All values below are recalculated from the fields above and the works in section 06.",
+    "fol_item":"Item","fol_A":"Config. A","fol_B":"Config. B","fol_C":"Config. C","fol_fixos":"Fixed workers (CLT)","fol_roco":"Field service (mower)","fol_limpeza":"Cleaning day-rates (every 15d)","fol_capExtra":"Extra deployment capital","fol_custoMes":"Monthly cost (payroll + services)","fol_custoRec":"Recurring monthly cost","fol_adjEst":"Deployment capital adjustment (greenhouse)","fol_capIni":"Estimated initial capital",
+    "fol_leitura":"Reading","fol_leituraTxt":"Configuration A has the highest monthly cost, but it is the only one with two people dedicated to the field from the start. C swaps the new R$ 14,900 greenhouse for the old one's renovation (~R$ 1,500), which reduces deployment capital by {dif} — but delays greenhouse production. B is the middle ground used as default in section 09. Choose the scenario there to see the cash profile.",
+    "prd_intro":"The production base is <strong>{base}</strong>, complemented by staggered-cycle fruit growing.",
+    "prd_frut":"Fruit growing","prd_areas":"Areas","prd_prior":"Priority","prd_exp":"Expansion","prd_atual":"Current state","prd_canais":"Commercialization channels","prd_base":"Channel","prd_ret":"Basis","prd_prazo":"Payback period","prd_nota":"PNAE is the highest-volume and slowest-paying channel. Local markets enter as immediate cash while the contract is pending. Gabriel's derivatives are the highest-margin line and the one least dependent on harvest.",
+    "inv_intro":"The model below runs month by month: it spends the capital at once at the start, pays payroll and maintenance from the first month and only starts receiving when the greenhouse produces.",
+    "inv_cen":"Payroll scenario","inv_resGiro":"Working reserve","inv_capManual":"Initial capital — leave empty to sum works + reserve","inv_recPlena":"Full-regime monthly revenue","inv_mes1":"First sale month","inv_rampa":"Months until full revenue","inv_horiz":"Projection horizon (months)",
+    "inv_capInicial":"Initial capital","inv_retorno":"Capital return","inv_caixa":"Cash required","inv_result":"Result at horizon","inv_custoFixo":"Fixed monthly cost","inv_equilibrio":"Break-even revenue","inv_margem":"Full-regime margin","inv_roi":"Return on capital",
+    "inv_perfil":"Accumulated cash profile","inv_abaixo":"below the line = capital still buried","inv_legAcima":"above zero line: profit","inv_legAbaixo":"below: capital to recover","inv_legEmerg":"emergency point","inv_mesMes":"Month by month",
+    "inv_nota":"The model is cash-flow, not accounting. It ignores tax, depreciation and land value. For negotiation with third parties, add an accountant's opinion.",
+    "inv_taxa":"Exchange rate (BRL per USD)","inv_taxaNota":"Used to display values in dollars in English mode.",
+    "val_intro":"Three ways to estimate how much the business is worth. None is the single right answer — the range between them is the useful information in a conversation with a partner, bank or buyer.",
+    "val_m1":"Method 01","val_m1t":"Replacement cost","val_m1d":"What it would cost to rebuild the improvements today. It is the floor of the negotiation.","val_m2":"Method 02","val_m2t":"Result multiple","val_m2d":"Annual full-regime result times a multiple. Small rural business usually runs between 3× and 5×.","val_m3":"Method 03","val_m3t":"Discounted cash flow","val_m3d":"Brings the result of coming years to today's value, with discount rate and growth.",
+    "val_fator":"Conservation factor","val_terra":"Land value","val_anual":"Annual result","val_mult":"Multiple","val_anos":"Projected years","val_taxa":"Discount rate (%)","val_cresc":"Annual growth (%)",
+    "val_atencao":"Attention","val_atencaoTxt":"With the current numbers the annual result is zero or negative, so methods 02 and 03 produce no value. Only the replacement cost sustains the driven valuation. Adjust revenue or monthly cost in section 09.",
+    "val_faixa":"Value range","val_piso":"Floor","val_ref":"Reference","val_teto":"Ceiling","val_nota":"While the chute and cabins are without budget, method 01 is below real. And while revenue is projection and not history, methods 02 and 03 are hypotheses — they gain weight after the first sales are recorded.",
+    "ris_intro":"What can stall the schedule or blow the cash, with the corresponding action.","ris_risco":"Risk","ris_impacto":"Impact","ris_acao":"Action","ris_decisoes":"Open decisions","ris_prox":"Next step","ris_proxH4":"Close the two open budgets before M2","ris_proxTxt":"The chute and cabins are the only items that still move the initial capital. Once defined, the cash profile in section 09 becomes a decision base and not an estimate.",
+    "nav_ant":"Previous","nav_prox":"Next",
+    "alert_import":"Could not read this file. It must be a JSON exported by this app or in the custos.json / cronograma.json format.",
+    "confirm_restore":"This discards all edits of this session and returns to the original package numbers. Continue?",
+    "ia_sem_chave":"Paste the API key to generate. Without a key, use the local draft beside it.","ia_gerando":"Generating…","ia_pronto":"Text ready. Review before inserting into the slide.","ia_copiou":"Copied.","ia_copiarbloq":"The browser blocked the copy. Select the text and copy by hand.","ia_rascunho":"Draft built from your numbers, without calling any model.","ia_inserido":"Text inserted into slide",
+    "mp_intro":"Write the narrative of slide \"{tit}\" of the Guajupiá project dossier.\nAudience: family, partners and potential investors. Serious, rural, direct tone, no startup jargon.\nBrazilian Portuguese. 2 to 3 short paragraphs, running text, no titles or bullets.\n\nProject data:\n{ctx}",
+    "ctx1":"Guajupiá project — agroecological deployment, 08/15/2026 to 02/15/2027.","ctx2":"Production: {base}; fruit growing of {frutas}.","ctx3":"Priority production area: {ha} ha. 96 m² greenhouse.","ctx4":"Initial capital: {cap}. Fixed monthly cost: {cm} (scenario {cen}).","ctx5":"Full projected revenue: {rec}/month from month {m}.","ctx6":"Capital return: {pb}. Lowest cash: {cx}.","ctx7":"Business reference value: {val}.","ctx8":"Channels: {canais}.",
+    "draft_capa":"The Guajupiá project turns a scrub plot into an agroecological production unit in six months, between August 15, 2026 and February 15, 2027. The projected deployment capital is {cap}.\n\nProduction is organized around aromatic and medicinal plants and fruit growing, with a 96 m² greenhouse as the core of the system. Capital return is projected for {pb}.",
+    "draft_proposito":"The decision to structure production on the land is not lifestyle, it is structure. The family starts producing its own food and generating income from an agroecological system that today has no competition in the region.\n\nThe three sales channels have different purpose timelines. Local market pays on the spot, PNAE pays at scale but is slow, and derivatives sustain the margin. Together they secure cash in the months the greenhouse is still forming.",
+    "draft_equipe":"Execution splits into four fronts with named responsibles, because each has its own cost logic: crew charges by day, machine by hour, carpentry by delivery.\n\nThis separation avoids the most expensive mistake in rural works, which is paying machine hours to do crew work.",
+    "draft_estruturas":"There are nine construction fronts, from a.1 to a.9, from heavy clearing to the cabins built with the site's own cut timber. The sequence is not negotiable: no clean land, no leveling; no leveling, no greenhouse; no greenhouse, no revenue.\n\nThe felled wood stops being rubble and becomes building material, which reduces the cost of the cabins and the chute.",
+    "draft_cronograma":"The six-month plan is staggered into phases F1 to F4, each with an objective closure criterion. A phase only closes when the criterion is true in the field, not when the service started.\n\nThe critical point is between month 3 and month 5: the assembled greenhouse takes about three months until the first sellable harvest. This interval defines the size of the working reserve.",
+    "draft_custos":"Direct deployment investment sums {tot} on the already budgeted items. The 96 m² greenhouse concentrates most of this value and comes from a factory in São Paulo, with freight included.\n\nThe chute and cabins remain without a closed budget. Until that is resolved, the initial capital of this dossier is underestimated and should be treated as a floor, not a final number.",
+    "draft_rotina":"The transition needs to separate structuring actions from the routines that sustain the site every day. Animals, health, irrigation and crop observation start immediately; mowing of the project areas is scheduled once a week with Adriano and Jorge.\n\nThe orchard has four days of service planned for deployment and inventory of existing and additional fruit trees. The six-month horizon represents the beginning of consolidation of medicinals, aromatics, gardens and fruit trees, not the end of management.",
+    "draft_folha":"Payroll is the project's biggest cash lever. With charges of {enc} on gross, Configuration A costs {fa} per month, B {fb} and C {fc}.\n\nThe annual difference between A and B is larger than the greenhouse cost. Starting from a leaner configuration and migrating to the ideal after the first recorded sales is the lower-risk path. C swaps the new greenhouse for the old one's renovation and reduces deployment capital by {dif}.",
+    "draft_producao":"The production base is aromatic and medicinal plants, plus a staggered-cycle fruit growing, from strawberry to cambuci.\n\nThe priority is 1.5 hectares with urgent design, within a property that is still 80% in scrub. Expansion to the 5 easy-management hectares only enters after the first area is producing.",
+    "draft_investimento":"With initial capital of {cap} and fixed monthly cost of {cm}, the project needs revenue of {eq} per month just to break even. Full projected revenue is {rec}.\n\nCash drops to {cx} before it starts rising. That is the number that needs to be effectively available, not the isolated initial capital. {pb_txt}",
+    "draft_valor":"The three methods deliver a range between {min} and {max}, with reference at {ref}. The replacement cost of improvements works as a floor and is the only method anchored in already-realized value.\n\nResult multiple and discounted cash flow depend on revenue that is still projection. They gain real weight after the first sales recorded on invoice.",
+    "draft_riscos":"Three risks concentrate most of the exposure: the trees over the power grid, which require the utility before any felling; the 1.5-hectare area at the vegetation suppression limit; and the three-month interval until the first PNAE sale.\n\nThe two open budgets, chute and cabins, are the most urgent decision. Until they close, every return number in this dossier is an estimate and not a decision base."
+  }
+};
+function t(k, vars) {
+  const lang = (estado && estado.idioma) || 'pt';
+  let s = (I18N[lang] && I18N[lang][k]) || (I18N.pt[k]) || k;
+  if (vars) for (const key in vars) s = s.split('{' + key + '}').join(vars[key]);
+  return s;
+}
+function emDolar() { return (estado && estado.idioma) === 'en'; }
+function taxaAtual() { return Number(estado && estado.taxaUSD) || 5.40; }
+function paraExibir(n) { const v = Number(n) || 0; return emDolar() ? v / taxaAtual() : v; }
+function fmt(n) {
+  const v = paraExibir(n);
+  if (emDolar()) return '$ ' + Math.round(v).toLocaleString('en-US');
+  return 'R$ ' + Math.round(v).toLocaleString('pt-BR');
+}
+function fmtc(n) {
+  const v = paraExibir(n);
+  if (emDolar()) return Math.round(v).toLocaleString('en-US');
+  return Math.round(v).toLocaleString('pt-BR');
+}
+const brl = n => fmt(n);
+const brlc = n => fmtc(n);
+function converterReaisParaDolar() {
+  if (!emDolar()) return;
+  const taxa = taxaAtual();
+  const walker = document.createTreeWalker(palco, NodeFilter.SHOW_TEXT, null);
+  const alvos = [];
+  while (walker.nextNode()) {
+    const node = walker.currentNode;
+    if (/R\$/.test(node.textContent) && !/R\$\s*[\d.,]+\s*→\s*\$/.test(node.textContent)) alvos.push(node);
+  }
+  alvos.forEach(node => {
+    node.textContent = node.textContent.replace(/R\$\s*([\d.]+)/g, (_, num) => {
+      const v = Number(String(num).replace(/\./g, '')) || 0;
+      return '$ ' + Math.round(v / taxa).toLocaleString('en-US');
+    });
+  });
+}
+function campoMoeda(path, valor, tipo, extra) {
+  const t = tipo || 'text';
+  const v = (valor === null || valor === undefined || valor === '') ? '' : (emDolar() ? Math.round(paraExibir(valor)) : valor);
+  return `<input type="${t}" data-liga="${path}" data-moeda="1" value="${esc(v)}" ${extra || ''}>`;
+}
+
+/* ---------- 3. MODELO FINANCEIRO ---------- */
+
+function custoTotalObras() {
+  return estado.custos.reduce((s, c) => s + (Number(c.custo) || 0), 0);
+}
+function itensSemOrcamento() {
+  return estado.custos.filter(c => c.custo === null || c.custo === '' || isNaN(Number(c.custo))).length;
+}
+function capitalInicial() {
+  if (estado.invest.capitalManual !== null && estado.invest.capitalManual !== '') {
+    return Number(estado.invest.capitalManual) || 0;
+  }
+  return custoTotalObras() + capitalExtraConfig(estado.invest.cenario) + (Number(estado.invest.reservaGiro) || 0);
+}
+function folhaFixaMensal(cen) {
+  const f = estado.folha[cen];
+  const vb = estado.folha.valoresBase;
+  const enc = 1 + (Number(estado.folha.encargosPct) || 0) / 100;
+  const fixos = (Number(f.fixos) || 0) * (Number(vb.funcionarioFixo) || 0) * enc;
+  const roco = (Number(f.rocoadeiraServ) || 0) * (Number(vb.rocoadeira) || 0);
+  const limpeza = (Number(f.diariaLimpezaServ) || 0) * (Number(vb.diariaLimpeza) || 0);
+  return fixos + roco + limpeza;
+}
+function custoMensal(cen) {
+  return folhaFixaMensal(cen);
+}
+function capitalExtraConfig(cen) {
+  const f = estado.folha[cen];
+  return (Number(f.capitalExtra) || 0) - (Number(f.descontaEstufaNova) || 0);
+}
+function receitaDoMes(m) {
+  const i = Number(estado.invest.mesInicioReceita) || 1;
+  const r = Number(estado.invest.receitaPlena) || 0;
+  const rampa = Math.max(1, Number(estado.invest.mesesRampa) || 1);
+  if (m < i) return 0;
+  return r * Math.min(1, (m - i + 1) / rampa);
+}
+
+function projetar() {
+  const cen = estado.invest.cenario;
+  const cap = capitalInicial();
+  const cm = custoMensal(cen);
+  const N = Math.max(1, Math.min(120, Number(estado.invest.horizonte) || 24));
+  const linhas = [];
+  let acum = -cap;
+  const serie = [{ mes: 0, acum }];
+
+  for (let m = 1; m <= N; m++) {
+    const rec = receitaDoMes(m);
+    const saldo = rec - cm;
+    acum += saldo;
+    linhas.push({ mes: m, receita: rec, custo: cm, saldo, acum });
+    serie.push({ mes: m, acum });
+  }
+
+  let payback = null, paybackExato = null;
+  for (let i = 1; i < serie.length; i++) {
+    if (serie[i].acum >= 0 && serie[i - 1].acum < 0) {
+      payback = serie[i].mes;
+      const a = serie[i - 1].acum, b = serie[i].acum;
+      paybackExato = serie[i - 1].mes + (b - a === 0 ? 1 : (0 - a) / (b - a));
+      break;
+    }
+  }
+
+  const caixaMin = Math.min(...serie.map(s => s.acum));
+  const resultado = serie[serie.length - 1].acum;
+  const saldoPleno = (Number(estado.invest.receitaPlena) || 0) - cm;
+
+  return {
+    cen, cap, custoMes: cm, folha: folhaFixaMensal(cen), N, linhas, serie,
+    payback, paybackExato, caixaMin, resultado, saldoPleno,
+    roi: cap > 0 ? (resultado / cap) * 100 : 0,
+    margem: estado.invest.receitaPlena > 0 ? (saldoPleno / estado.invest.receitaPlena) * 100 : 0,
+    equilibrioReceita: cm
+  };
+}
+
+function avaliar() {
+  const p = projetar();
+  const v = estado.valuation;
+  const terreno = Number(v.valorTerreno) || 0;
+  const anual = Math.max(0, p.saldoPleno * 12);
+
+  const benfeitorias = custoTotalObras() * (Number(v.fatorConservacao) || 1) + terreno;
+  const multiplo = anual * (Number(v.multiplo) || 0) + terreno;
+
+  const d = (Number(v.taxaDesconto) || 0) / 100;
+  const g = (Number(v.crescimento) || 0) / 100;
+  const anos = Math.max(1, Math.min(30, Number(v.anos) || 10));
+  let vpl = 0;
+  for (let t = 1; t <= anos; t++) vpl += (anual * Math.pow(1 + g, t - 1)) / Math.pow(1 + d, t);
+  const fcd = vpl + terreno;
+
+  const vals = [benfeitorias, multiplo, fcd];
+  return {
+    anual, benfeitorias, multiplo, fcd,
+    min: Math.min(...vals), max: Math.max(...vals),
+    central: vals.reduce((a, b) => a + b, 0) / 3,
+    anos
+  };
+}
+
+/* ---------- 4. GRÁFICO: PERFIL DE TERRENO ---------- */
+
+function desenharTerreno() {
+  const p = projetar();
+  const W = 760, H = 300, ml = 68, mr = 14, mt = 20, mb = 36;
+  const iw = W - ml - mr, ih = H - mt - mb;
+
+  const vals = p.serie.map(s => s.acum);
+  let vmin = Math.min(0, ...vals), vmax = Math.max(0, ...vals);
+  const folga = (vmax - vmin) * 0.12 || 1000;
+  vmin -= folga; vmax += folga;
+
+  const X = i => ml + (i / (p.serie.length - 1)) * iw;
+  const Y = v => mt + ih - ((v - vmin) / (vmax - vmin)) * ih;
+  const solo = Y(0);
+
+  const pts = p.serie.map((s, i) => `${X(i).toFixed(1)},${Y(s.acum).toFixed(1)}`);
+  const linha = 'M' + pts.join(' L');
+  const area = `${linha} L${X(p.serie.length - 1).toFixed(1)},${solo.toFixed(1)} L${ml},${solo.toFixed(1)} Z`;
+
+  // marcas do eixo x a cada 3 meses
+  let eixoX = '';
+  for (let i = 0; i < p.serie.length; i += Math.max(1, Math.ceil(p.N / 8))) {
+    eixoX += `<text x="${X(i).toFixed(1)}" y="${H - 12}" text-anchor="middle" class="tx-eixo">M${p.serie[i].mes}</text>`;
+  }
+
+  let marcaPayback = '';
+  if (p.paybackExato !== null) {
+    const px = X(p.paybackExato);
+    marcaPayback = `
+      <line x1="${px.toFixed(1)}" y1="${mt}" x2="${px.toFixed(1)}" y2="${solo.toFixed(1)}"
+            stroke="var(--ferrugem)" stroke-width="1.4" stroke-dasharray="4 3"/>
+      <circle cx="${px.toFixed(1)}" cy="${solo.toFixed(1)}" r="5" fill="var(--ferrugem)"/>
+      <text x="${(px + 9).toFixed(1)}" y="${(solo - 12).toFixed(1)}" class="tx-marca">emerge no mês ${p.payback}</text>`;
+  } else {
+    marcaPayback = `<text x="${ml + 10}" y="${mt + 18}" class="tx-marca">não emerge dentro de ${p.N} meses</text>`;
+  }
+
+  return `
+<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Perfil do caixa acumulado ao longo dos meses">
+  <defs>
+    <pattern id="hachura" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+      <rect width="8" height="8" fill="rgba(142,63,39,.12)"/>
+      <line x1="0" y1="0" x2="0" y2="8" stroke="rgba(142,63,39,.5)" stroke-width="2.2"/>
+    </pattern>
+    <clipPath id="acima"><rect x="0" y="0" width="${W}" height="${solo.toFixed(1)}"/></clipPath>
+    <clipPath id="abaixo"><rect x="0" y="${solo.toFixed(1)}" width="${W}" height="${(H - solo).toFixed(1)}"/></clipPath>
+    <style>
+      .tx-eixo{font-family:var(--mono);font-size:10px;fill:rgba(34,27,18,.55)}
+      .tx-val{font-family:var(--mono);font-size:10px;fill:rgba(34,27,18,.62)}
+      .tx-marca{font-family:var(--mono);font-size:10.5px;fill:var(--ferrugem);font-weight:600}
+      .tx-solo{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;fill:rgba(34,27,18,.5)}
+    </style>
+  </defs>
+
+  <path d="${area}" fill="var(--broto)" fill-opacity=".45" clip-path="url(#acima)"/>
+  <path d="${area}" fill="url(#hachura)" clip-path="url(#abaixo)"/>
+
+  <line x1="${ml}" y1="${solo.toFixed(1)}" x2="${W - mr}" y2="${solo.toFixed(1)}" stroke="var(--tinta)" stroke-width="1.6"/>
+  <text x="${W - mr}" y="${(solo - 6).toFixed(1)}" text-anchor="end" class="tx-solo">NÍVEL ZERO · CAPITAL RECUPERADO</text>
+
+  <path d="${linha}" fill="none" stroke="var(--tinta)" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+  ${marcaPayback}
+
+  <line x1="${ml}" y1="${mt}" x2="${ml}" y2="${H - mb}" stroke="var(--linha-forte)" stroke-width="1"/>
+  <text x="${ml - 8}" y="${(Y(vmax - folga / 2) + 3).toFixed(1)}" text-anchor="end" class="tx-val">${brlc(vmax - folga / 2)}</text>
+  <text x="${ml - 8}" y="${(solo + 3).toFixed(1)}" text-anchor="end" class="tx-val">0</text>
+  <text x="${ml - 8}" y="${(Y(vmin + folga / 2) + 3).toFixed(1)}" text-anchor="end" class="tx-val">${brlc(vmin + folga / 2)}</text>
+  ${eixoX}
+</svg>`;
+}
+
+/* ---------- 5. SEÇÕES ---------- */
+
+function campo(path, valor, tipo, extra) {
+  const t = tipo || 'text';
+  const v = valor === null || valor === undefined ? '' : valor;
+  return `<input type="${t}" data-liga="${path}" value="${esc(v)}" ${extra || ''}>`;
+}
+
+const SECOES = [
+  { id: 'capa', n: '01', titulo: 'Capa', titulo_en: 'Cover', eyebrow: 'Documento', eyebrow_en: 'Document', render: rCapa },
+  { id: 'proposito', n: '02', titulo: 'Propósito', titulo_en: 'Purpose', eyebrow: 'Por que fazer', eyebrow_en: 'Why', render: rProposito },
+  { id: 'equipe', n: '03', titulo: 'Equipe', titulo_en: 'Team', eyebrow: 'Quem executa', eyebrow_en: 'Who executes', render: rEquipe },
+  { id: 'estruturas', n: '04', titulo: 'Ações de estruturação', titulo_en: 'Structuring actions', eyebrow: 'Implantação e obras', eyebrow_en: 'Deployment and works', render: rEstruturas },
+  { id: 'rotina', n: '05', titulo: 'Ações do dia a dia', titulo_en: 'Daily actions', eyebrow: 'Rotina operacional', eyebrow_en: 'Operational routine', render: rRotina },
+  { id: 'cronograma', n: '06', titulo: 'Cronograma', titulo_en: 'Schedule', eyebrow: 'M1 a M6', eyebrow_en: 'M1 to M6', render: rCronograma },
+  { id: 'custos', n: '07', titulo: 'Custos', titulo_en: 'Costs', eyebrow: 'Investimento direto', eyebrow_en: 'Direct investment', render: rCustos },
+  { id: 'folha', n: '08', titulo: 'Folha', titulo_en: 'Payroll', eyebrow: 'Configurações A, B e C', eyebrow_en: 'Configurations A, B and C', render: rFolha },
+  { id: 'producao', n: '09', titulo: 'Produção e canais', titulo_en: 'Production and channels', eyebrow: 'O que sai da terra', eyebrow_en: 'What comes from the land', render: rProducao },
+  { id: 'investimento', n: '10', titulo: 'Investimento', titulo_en: 'Investment', eyebrow: 'Retorno e caixa', eyebrow_en: 'Return and cash', render: rInvestimento },
+  { id: 'valor', n: '11', titulo: 'Valor do negócio', titulo_en: 'Business value', eyebrow: 'Três métodos', eyebrow_en: 'Three methods', render: rValor },
+  { id: 'riscos', n: '12', titulo: 'Riscos e decisões', titulo_en: 'Risks and decisions', eyebrow: 'O que pode travar', eyebrow_en: 'What can stall', render: rRiscos }
+];
+
+function rCapa() {
+  const p = projetar();
+  const a = avaliar();
+  return `
+  <div class="capa">
+    <div class="capa-topo">
+      <span>${t('capa_topo1')}</span>
+      <span>15/08/2026 → 15/02/2027 · 6 meses</span>
+    </div>
+    <div class="capa-corpo">
+      <h2>Guajupiá</h2>
+      <p class="lema">${esc(estado.projeto.lema)}</p>
+      <p class="desc">${t('capa_desc')}</p>
+      <div class="assinantes">
+        ${estado.projeto.responsaveis.map(r => `<div><span>${esc(r.papel)}</span>${esc(r.nome)}</div>`).join('')}
+      </div>
+    </div>
+  </div>
+  <div class="foto-moldura">
+    <button type="button" class="foto-quadro" data-acao="foto-sitio" aria-label="Trocar foto do sítio">
+      <span class="foto-placeholder" data-role="foto-ph" ${estado.fotoSitio === '' ? '' : 'style="display:none"'}>toque para inserir a foto do sítio</span>
+      <img class="foto-img" alt="Sítio Guajupiá" src="${(estado.fotoSitio === '' || estado.fotoSitio === null) ? 'foto-sitio.jpg' : estado.fotoSitio}" ${estado.fotoSitio === '' ? 'hidden' : ''}>
+    </button>
+  </div>
+  <div class="resumo-situacao">
+    <h3>${t('resumo_h3')}</h3>
+    <p>${t('resumo_txt')}</p>
+  </div>`;
+}
+
+function rProposito() {
+  return `
+  <p>${t('prop_intro')}</p>
+  <div class="grade">
+    <div class="ficha"><span class="cod">Motivo 01</span><h4>${t('prop_m1')}</h4><p>Alimento seguro e autossuficiência antes de qualquer conta de venda.</p></div>
+    <div class="ficha ficha--ocre"><span class="cod">Motivo 02</span><h4>${t('prop_m2')}</h4><p>PNAE, mercados locais e derivados de valor agregado. Três canais com prazos diferentes, o que estabiliza o caixa.</p></div>
+    <div class="ficha ficha--mata"><span class="cod">Motivo 03</span><h4>${t('prop_m3')}</h4><p>Não há concorrência agroecológica na região. A janela existe agora e depende de chegar antes.</p></div>
+  </div>
+  <h3>${t('prop_mudatit')}</h3>
+  <p>${t('prop_mudatxt')}</p>
+  <div class="aviso-edicao">${t('prop_aviso')}</div>`;
+}
+
+function rEquipe() {
+  return `
+  <p>${t('eq_intro')}</p>
+  <div class="grade">
+    ${estado.equipe.map((p, i) => `
+      <div class="ficha">
+        <span class="cod">${esc(p.cod)} · ${esc(p.frente)}</span>
+        <h4>${campo(`equipe.${i}.nome`, p.nome)}</h4>
+        <p>${campo(`equipe.${i}.papel`, p.papel)}</p>
+        <button class="bt-min" data-acao="remover-equipe" data-i="${i}">${t('eq_remover')}</button>
+      </div>`).join('')}
+  </div>
+  <button class="bt" data-acao="add-equipe" style="margin-top:12px">${t('eq_add')}</button>`;
+}
+
+function rEstruturas() {
+  const feitas = estado.estruturas.filter(e => e.status === 'concluido').length;
+  const pctf = (feitas / estado.estruturas.length) * 100;
+  return `
+  <p>${t('est_intro')}</p>
+  <div style="margin:16px 0 4px;display:flex;justify-content:space-between;align-items:baseline">
+    <span class="num" style="font-size:14px">${feitas} de ${estado.estruturas.length} concluídas</span>
+    <span class="num" style="font-size:13px;color:rgba(34,27,18,.6)">${pct(pctf)}</span>
+  </div>
+  <div class="progresso"><i style="width:${pctf}%"></i></div>
+  <div class="tab-wrap">
+    <table>
+      <thead><tr><th style="width:52px">${t('est_cod')}</th><th>${t('est_frente')}</th><th style="width:150px">${t('est_resp')}</th><th style="width:132px">${t('est_and')}</th></tr></thead>
+      <tbody>
+        ${estado.estruturas.map((e, i) => `
+        <tr>
+          <td class="num">${esc(e.cod)}</td>
+          <td><strong>${campo(`estruturas.${i}.titulo`, e.titulo)}</strong>
+              <div class="nota" style="margin-top:2px">${esc(e.detalhe)}</div></td>
+          <td>${campo(`estruturas.${i}.resp`, e.resp)}</td>
+          <td>
+            <select data-liga="estruturas.${i}.status" data-recarrega="1">
+              <option value="pendente"${e.status === 'pendente' ? ' selected' : ''}>${t('est_pend')}</option>
+              <option value="andamento"${e.status === 'andamento' ? ' selected' : ''}>${t('est_andamento')}</option>
+              <option value="concluido"${e.status === 'concluido' ? ' selected' : ''}>${t('est_concl')}</option>
+            </select>
+          </td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+  </div>
+  <div class="img-ph">${t('est_ph')}</div>`;
+}
+
+function rRotina() {
+  return `
+  <p>${t('rot_intro')}</p>
+  <div class="tab-wrap">
+    <table>
+      <thead><tr><th style="width:150px">${t('rot_freq')}</th><th>${t('rot_acao')}</th><th style="width:300px">${t('rot_resp')}</th><th style="width:130px">${t('rot_sit')}</th></tr></thead>
+      <tbody>
+        ${estado.rotinas.map((r, i) => `
+        <tr>
+          <td class="num">${esc(r.frequencia)}</td>
+          <td><strong>${campo(`rotinas.${i}.acao`, r.acao)}</strong><div class="nota" style="margin-top:2px">${esc(r.detalhe)}</div></td>
+          <td>${campo(`rotinas.${i}.resp`, r.resp)}</td>
+          <td>
+            <select data-liga="rotinas.${i}.status" data-recarrega="1">
+              <option value="iniciar"${r.status === 'iniciar' ? ' selected' : ''}>${t('rot_iniciar')}</option>
+              <option value="ativa"${r.status === 'ativa' ? ' selected' : ''}>${t('rot_ativa')}</option>
+              <option value="pausada"${r.status === 'pausada' ? ' selected' : ''}>${t('rot_paus')}</option>
+            </select>
+          </td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+  </div>
+  <div class="ficha ficha--mata" style="margin-top:16px">
+    <span class="cod">${t('rot_cod')}</span>
+    <h4>${t('rot_h4')}</h4>
+    <p>${t('rot_txt')}</p>
+  </div>`;
+}
+
+function rCronograma() {
+  const K = estado.cronograma;
+  return `
+  <p>${t('cro_intro')}</p>
+  <div class="grade" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-bottom:16px">
+    <div class="ficha">
+      <label>${t('cro_ini')}</label>
+      ${campo('cronograma.inicio', K.inicio, 'date')}
+    </div>
+    <div class="ficha ficha--ocre">
+      <label>${t('cro_fim')}</label>
+      ${campo('cronograma.fim', K.fim, 'date')}
+    </div>
+  </div>
+  <div class="linha-tempo">
+    ${K.fases.map((f, i) => `
+      <div class="fase">
+        <span class="m">${campo(`cronograma.fases.${i}.mes`, f.mes)}</span>
+        <span class="per">${campo(`cronograma.fases.${i}.periodo`, f.periodo)}</span>
+        <div class="foco"><textarea rows="3" data-liga="cronograma.fases.${i}.foco">${esc(f.foco)}</textarea></div>
+        <span class="tag">Fase ${campo(`cronograma.fases.${i}.fase`, f.fase)}</span>
+      </div>`).join('')}
+  </div>
+  <h3>${t('cro_marcos')}</h3>
+  <p class="nota">${t('cro_marcosnota')}</p>
+  <div class="tab-wrap">
+    <table>
+      <thead><tr><th style="width:56px">${t('cro_fase')}</th><th>${t('cro_criterio')}</th><th style="width:88px">${t('cro_valid')}</th></tr></thead>
+      <tbody>
+        ${Object.entries(K.marcos_validacao).map(([k, v]) => `
+        <tr>
+          <td class="num"><strong>${esc(k)}</strong></td>
+          <td><textarea rows="2" data-liga="cronograma.marcos_validacao.${k}">${esc(v)}</textarea></td>
+          <td style="text-align:center">
+            <input type="checkbox" data-marco="${esc(k)}" ${estado.marcosFeitos[k] ? 'checked' : ''} aria-label="Validar ${esc(k)}">
+          </td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+  </div>
+  <div class="aviso-edicao">${t('cro_aviso')}</div>
+  <p class="nota" style="margin-top:12px">${t('cro_nota')}</p>`;
+}
+
+function rCustos() {
+  const total = custoTotalObras();
+  const abertos = itensSemOrcamento();
+  const rot = estado.custos.map((c, i) => `
+    <tr${c.custo === null ? ' class="risco"' : ''}>
+      <td>${campo(`custos.${i}.item`, c.item)}
+          ${c.nota ? `<div class="nota" style="margin-top:2px">${esc(c.nota)}</div>` : ''}</td>
+      <td class="n">${campo(`custos.${i}.dias`, c.dias, 'number', 'min="0" step="1" placeholder="—"')}</td>
+      <td class="n">${campoMoeda(`custos.${i}.custo`, c.custo, 'number', 'min="0" step="50" placeholder="' + t('cus_aviso') + '"')}</td>
+      <td><button class="bt-min" data-acao="remover-custo" data-i="${i}">${t('cus_excluir')}</button></td>
+    </tr>`).join('');
+  return `
+  <p>${t('cus_intro')}</p>
+  <div class="tab-wrap">
+    <table>
+      <thead><tr><th>Item</th><th class="n" style="width:74px">${t('cus_dias')}</th><th class="n" style="width:130px">${t('cus_custo_hdr')}</th><th style="width:56px"></th></tr></thead>
+      <tbody>${rot}</tbody>
+      <tfoot>
+        <tr><td>${t('cus_total')}${abertos ? ` <span class="nota">· ${abertos} ${abertos > 1 ? t('cus_itens') : t('cus_item1')}</span>` : ''}</td>
+        <td class="n"></td><td class="n" data-saida="totalCustos">${brl(total)}</td><td></td></tr>
+      </tfoot>
+    </table>
+  </div>
+  <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+    <button class="bt" data-acao="add-custo">${t('cus_add')}</button>
+    <button class="bt" data-acao="baixar-custos">${t('cus_baixar')}</button>
+  </div>
+  <div class="aviso-edicao">${t('cus_aviso2')}</div>`;
+}
+
+function rFolha() {
+  const cenarios = ['A', 'B', 'C'];
+  const vb = estado.folha.valoresBase;
+  const enc = 1 + (Number(estado.folha.encargosPct) || 0) / 100;
+
+  const linha = (k) => {
+    const f = estado.folha[k];
+    const fixoUnit = (Number(vb.funcionarioFixo) || 0) * enc;
+    const folhaFixa = (Number(f.fixos) || 0) * fixoUnit;
+    const serv = (Number(f.rocoadeiraServ) || 0) * (Number(vb.rocoadeira) || 0)
+               + (Number(f.diariaLimpezaServ) || 0) * (Number(vb.diariaLimpeza) || 0);
+    const custoMes = folhaFixa + serv;
+    const estufa = (Number(f.descontaEstufaNova) || 0) > 0
+      ? `${brl(Number(f.descontaEstufaNova) || 0)} (reforma antiga) + ${brl(Number(f.capitalExtra) || 0)}`
+      : (Number(f.capitalExtra) || 0) > 0 ? brl(Number(f.capitalExtra) || 0) : '—';
+    const cap = capitalExtraConfig(k);
+    return { k, f, folhaFixa, serv, custoMes, fixoUnit, estufa, cap };
+  };
+
+  const L = cenarios.map(linha);
+
+  const ficha = (o) => `
+    <div class="ficha ${o.k === 'A' ? 'ficha--ferro' : o.k === 'B' ? 'ficha--mata' : 'ficha--ocre'}">
+      <span class="cod">Configuração ${o.k}</span>
+      <h4>${esc(o.f.rotulo.split('—')[1] ? o.f.rotulo.split('—')[1].trim() : o.f.rotulo)}</h4>
+      <p style="margin-bottom:10px">${esc(o.f.equipe)}</p>
+      <div style="display:grid;grid-template-columns:1fr 88px;gap:6px 10px;align-items:center;font-size:13.5px">
+        <span>Funcionários fixos (CLT)</span>${campo(`folha.${o.k}.fixos`, o.f.fixos, 'number', 'min="0" step="1"')}
+        <span>Serviço de campo (roçadeira)</span>${campo(`folha.${o.k}.rocoadeiraServ`, o.f.rocoadeiraServ, 'number', 'min="0" step="1"')}
+        <span>Diárias de limpeza (15 em 15d)</span>${campo(`folha.${o.k}.diariaLimpezaServ`, o.f.diariaLimpezaServ, 'number', 'min="0" step="1"')}
+        <span>Capital extra de implantação</span>${campo(`folha.${o.k}.capitalExtra`, o.f.capitalExtra, 'number', 'min="0" step="50"')}
+      </div>
+      <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--linha)">
+        <span class="nota">Custo mensal (folha + serviços)</span><br>
+        <strong class="num" style="font-size:21px;color:var(--mata)" data-saida="folhaTotal${o.k}">${brl(o.custoMes)}</strong>
+      </div>
+    </div>`;
+
+  return `
+  <p>${t('fol_intro', { enc: pct(estado.folha.encargosPct) })}</p>
+  <div class="ctl" style="max-width:280px;margin-top:16px">
+    <label for="enc">${t('fol_enc')}</label>
+    ${campo('folha.encargosPct', estado.folha.encargosPct, 'number', 'min="0" max="100" step="0.5" id="enc"')}
+  </div>
+  <div class="ctl" style="max-width:320px;margin-top:10px">
+    <label>${t('fol_sal')}</label>
+    ${campo('folha.valoresBase.funcionarioFixo', vb.funcionarioFixo, 'number', 'min="0" step="50"')}
+  </div>
+  <div class="grade" style="grid-template-columns:repeat(auto-fit,minmax(290px,1fr))">
+    ${L.map(ficha).join('')}
+  </div>
+
+  <h3 style="margin-top:22px">${t('fol_comp')}</h3>
+  <p class="nota">${t('fol_compnota')}</p>
+  <div class="tab-wrap">
+    <table>
+      <thead><tr>
+        <th>${t('fol_item')}</th><th class="n">${t('fol_A')}</th><th class="n">${t('fol_B')}</th><th class="n">${t('fol_C')}</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>${t('fol_fixos')}</td>${L.map(o => `<td class="n" data-saida="fxFixos${o.k}">${o.f.fixos}</td>`).join('')}</tr>
+        <tr><td>Folha fixa mensal (c/ encargos)</td>${L.map(o => `<td class="n" data-saida="fxFolha${o.k}">${brl(o.folhaFixa)}</td>`).join('')}</tr>
+        <tr><td>${t('fol_roco')}</td>${L.map(o => `<td class="n" data-saida="fxServ${o.k}">${brl(o.serv)}</td>`).join('')}</tr>
+        <tr><td><strong>${t('fol_custoRec')}</strong></td>${L.map(o => `<td class="n"><strong data-saida="fxCusto${o.k}">${brl(o.custoMes)}</strong></td>`).join('')}</tr>
+        <tr><td>Custo mensal × 6 meses</td>${L.map(o => `<td class="n" data-saida="fxSemestre${o.k}">${brl(o.custoMes * 6)}</td>`).join('')}</tr>
+        <tr><td>${t('fol_adjEst')}</td>${L.map(o => `<td class="n" data-saida="fxCap${o.k}">${o.cap ? (o.cap > 0 ? '+' : '') + brl(o.cap) : '—'}</td>`).join('')}</tr>
+        <tr><td><strong>${t('fol_capIni')}</strong></td>${L.map(o => `<td class="n"><strong data-saida="fxCapIni${o.k}">${brl(custoTotalObras() + o.cap + (Number(estado.invest.reservaGiro) || 0))}</strong></td>`).join('')}</tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ficha ficha--ferro" style="margin-top:14px">
+    <span class="cod">${t('fol_leitura')}</span>
+    <p>${t('fol_leituraTxt', { dif: brl(capitalExtraConfig('C') - capitalExtraConfig('A')) })}</p>
+  </div>`;
+}
+
+function rProducao() {
+  const pr = estado.producao;
+  return `
+  <p>${t('prd_intro', { base: esc(pr.base) })}</p>
+  <h3>${t('prd_frut')}</h3>
+  <div class="grade" style="grid-template-columns:repeat(auto-fit,minmax(130px,1fr))">
+    ${pr.frutas.map(f => `<div class="ficha" style="border-left-color:var(--ocre);padding:10px 12px"><strong style="font-size:15px">${esc(f)}</strong></div>`).join('')}
+  </div>
+  <h3>${t('prd_areas')}</h3>
+  <div class="grade">
+    <div class="ficha"><span class="cod">${t('prd_prior')}</span><h4 class="num">${pr.areas_ha.produtiva_urgente} ha</h4><p>Área produtiva com desenho urgente. Vegetação no limite de supressão.</p></div>
+    <div class="ficha"><span class="cod">${t('prd_exp')}</span><h4 class="num">${pr.areas_ha.manejo_facil} ha</h4><p>Área de manejo fácil, entra depois do M5.</p></div>
+    <div class="ficha ficha--ferro"><span class="cod">${t('prd_atual')}</span><h4 class="num">${pr.areas_ha.capoeira_percent}%</h4><p>Da propriedade está em capoeira. Roçada e limpeza vêm antes de qualquer plantio.</p></div>
+  </div>
+  <h3>${t('prd_canais')}</h3>
+  <div class="tab-wrap">
+    <table>
+      <thead><tr><th>${t('prd_base')}</th><th style="width:190px">Base</th><th style="width:230px">${t('prd_prazo')}</th></tr></thead>
+      <tbody>
+        ${estado.canais.map(c => `
+        <tr><td><strong>${esc(c.canal)}</strong>${c.nota ? `<div class="nota">${esc(c.nota)}</div>` : ''}</td>
+        <td>${esc(c.base_legal)}</td><td>${esc(c.retorno)}</td></tr>`).join('')}
+      </tbody>
+    </table>
+  </div>
+  <p class="nota" style="margin-top:12px">${t('prd_nota')}</p>`;
+}
+
+function rInvestimento() {
+  const p = projetar();
+  const cen = estado.invest.cenario;
+  return `
+  <p>${t('inv_intro')}</p>
+
+  <div class="painel">
+    <div class="controles">
+      <div class="ctl">
+        <label>${t('inv_cen')}</label>
+        <div class="escolha">
+          <button data-cenario="A" class="${cen === 'A' ? 'on' : ''}"><b>A</b>2 campo + 1 limpeza</button>
+          <button data-cenario="B" class="${cen === 'B' ? 'on' : ''}"><b>B</b>1 fixo + esporádicos</button>
+          <button data-cenario="C" class="${cen === 'C' ? 'on' : ''}"><b>C</b>1 fixo + reforma estufa</button>
+        </div>
+      </div>
+      <div class="ctl">
+        <label for="ip1">${t('inv_resGiro')} (${t('capa_capital_label')})</label>
+        ${campoMoeda('invest.reservaGiro', estado.invest.reservaGiro, 'number', 'min="0" step="500" id="ip1"')}
+      </div>
+      <div class="ctl">
+        <label for="ip2">${t('inv_capManual')}</label>
+        ${campoMoeda('invest.capitalManual', estado.invest.capitalManual, 'number', 'min="0" step="500" id="ip2" placeholder="' + t('capa_capital_label') + ' ' + brlc(capitalInicial()) + '"')}
+      </div>
+      <div class="ctl">
+        <label for="ip3">${t('inv_recPlena')} (${t('capa_capital_label')})</label>
+        ${campoMoeda('invest.receitaPlena', estado.invest.receitaPlena, 'number', 'min="0" step="100" id="ip3"')}
+      </div>
+      <div class="ctl">
+        <label for="ip4">${t('inv_mes1')}</label>
+        ${campo('invest.mesInicioReceita', estado.invest.mesInicioReceita, 'number', 'min="1" max="36" step="1" id="ip4"')}
+      </div>
+      <div class="ctl">
+        <label for="ip5">${t('inv_rampa')}</label>
+        ${campo('invest.rampaReceita', estado.invest.rampaReceita, 'number', 'min="1" max="36" step="1" id="ip5"')}
+      </div>
+      <div class="ctl">
+        <label for="ip6">${t('inv_horiz')}</label>
+        ${campo('invest.horizonte', estado.invest.horizonte, 'number', 'min="6" max="120" step="1" id="ip6"')}
+      </div>
+      <div class="ctl">
+        <label for="ip7">${t('inv_taxa')}</label>
+        ${campo('taxaUSD', estado.taxaUSD, 'number', 'min="1" max="20" step="0.1" id="ip7"')}
+      </div>
+    </div>
+
+    <div class="leitura">
+    <div class="placar">
+      <div class="metrica ocre"><span class="r">${t('inv_capInicial')}</span><span class="v" data-saida="capital">${brl(p.cap)}</span><span class="obs" data-saida="capitalObs">obras + reserva de giro</span></div>
+      <div class="metrica" data-saida-classe="paybackClasse"><span class="r">${t('inv_retorno')}</span><span class="v" data-saida="payback">${p.payback ? p.payback + ' m' : '—'}</span><span class="obs" data-saida="paybackObs"></span></div>
+      <div class="metrica" data-saida-classe="caixaClasse"><span class="r">${t('inv_caixa')}</span><span class="v" data-saida="caixaMin">${brl(Math.abs(p.caixaMin))}</span><span class="obs" data-saida="caixaObs"></span></div>
+      <div class="metrica" data-saida-classe="resultadoClasse"><span class="r">${t('inv_result')}</span><span class="v" data-saida="resultado">${brl(p.resultado)}</span><span class="obs" data-saida="resultadoObs"></span></div>
+    </div>
+
+    <div class="terreno">
+      <div class="terreno-cab">
+        <h4>${t('inv_perfil')}</h4>
+        <span class="leg">${t('inv_abaixo')}</span>
+      </div>
+      <div id="terreno-svg">${desenharTerreno()}</div>
+      <div class="legenda">
+        <span><i style="background:rgba(111,140,60,.65)"></i>${t('inv_legAcima')}</span>
+        <span><i style="background:rgba(142,63,39,.45)"></i>${t('inv_legAbaixo')}</span>
+        <span><i style="background:var(--ferrugem)"></i>${t('inv_legEmerg')}</span>
+      </div>
+    </div>
+
+    <div class="placar">
+      <div class="metrica"><span class="r">${t('inv_custoFixo')}</span><span class="v" data-saida="custoMes">${brl(p.custoMes)}</span><span class="obs">folha com encargos + manutenção</span></div>
+      <div class="metrica"><span class="r">${t('inv_equilibrio')}</span><span class="v" data-saida="equilibrio">${brl(p.equilibrioReceita)}</span><span class="obs">venda mensal que zera o mês</span></div>
+      <div class="metrica"><span class="r">${t('inv_margem')}</span><span class="v" data-saida="margem">${pct(p.margem)}</span><span class="obs">sobre a receita cheia</span></div>
+      <div class="metrica"><span class="r">${t('inv_roi')}</span><span class="v" data-saida="roi">${pct(p.roi)}</span><span class="obs" data-saida="roiObs"></span></div>
+    </div>
+    </div>
+    </div>
+
+    <h3>${t('inv_mesMes')}</h3>
+    <div class="tab-wrap" style="max-height:340px;overflow-y:auto">
+    <table id="tabela-fluxo">${linhasFluxo(p)}</table>
+    </div>
+    <p class="nota" style="margin-top:12px">${t('inv_nota')}</p>`;
+}
+
+function linhasFluxo(p) {
+  return `
+  <thead><tr><th style="width:60px">Mês</th><th class="n">${t('inv_recPlena')}</th><th class="n">${t('inv_custoFixo')}</th><th class="n">${t('inv_result')}</th><th class="n">${t('inv_caixa')}</th></tr></thead>
+  <tbody>
+    ${p.linhas.map(l => `
+    <tr${l.acum >= 0 ? '' : ' class="risco"'}>
+      <td class="num">M${l.mes}</td>
+      <td class="n">${l.receita ? brlc(l.receita) : '—'}</td>
+      <td class="n">${brlc(l.custo)}</td>
+      <td class="n" style="color:${l.saldo >= 0 ? 'var(--mata)' : 'var(--ferrugem)'}">${l.saldo >= 0 ? '+' : ''}${brlc(l.saldo)}</td>
+      <td class="n"><strong>${brlc(l.acum)}</strong></td>
+    </tr>`).join('')}
+  </tbody>`;
+}
+
+function rValor() {
+  const a = avaliar();
+  return `
+  <p>${t('val_intro')}</p>
+
+  <div class="grade" style="grid-template-columns:repeat(auto-fit,minmax(230px,1fr))">
+    <div class="ficha ficha--mata">
+      <span class="cod">${t('val_m1')}</span><h4>${t('val_m1t')}</h4>
+      <p>${t('val_m1d')}</p>
+      <div style="display:grid;grid-template-columns:1fr 80px;gap:6px 10px;align-items:center;margin-top:10px;font-size:13.5px">
+        <span>${t('val_fator')}</span>${campo('valuation.fatorConservacao', estado.valuation.fatorConservacao, 'number', 'min="0" max="3" step="0.05"')}
+        <span>${t('val_terra')}</span>${campoMoeda('valuation.valorTerreno', estado.valuation.valorTerreno, 'number', 'min="0" step="1000"')}
+      </div>
+      <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--linha)">
+        <strong class="num" style="font-size:21px;color:var(--mata)" data-saida="valBenf">${brl(a.benfeitorias)}</strong>
+      </div>
+    </div>
+
+    <div class="ficha ficha--ocre">
+      <span class="cod">${t('val_m2')}</span><h4>${t('val_m2t')}</h4>
+      <p>${t('val_m2d')}</p>
+      <div style="display:grid;grid-template-columns:1fr 80px;gap:6px 10px;align-items:center;margin-top:10px;font-size:13.5px">
+        <span>${t('val_anual')}</span><span class="num" style="text-align:right" data-saida="resAnual">${brlc(a.anual)}</span>
+        <span>${t('val_mult')}</span>${campo('valuation.multiplo', estado.valuation.multiplo, 'number', 'min="0" max="20" step="0.5"')}
+      </div>
+      <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--linha)">
+        <strong class="num" style="font-size:21px;color:var(--mata)" data-saida="valMult">${brl(a.multiplo)}</strong>
+      </div>
+    </div>
+
+    <div class="ficha">
+      <span class="cod">${t('val_m3')}</span><h4>${t('val_m3t')}</h4>
+      <p>${t('val_m3d')}</p>
+      <div style="display:grid;grid-template-columns:1fr 80px;gap:6px 10px;align-items:center;margin-top:10px;font-size:13.5px">
+        <span>${t('val_anos')}</span>${campo('valuation.anos', estado.valuation.anos, 'number', 'min="1" max="30" step="1"')}
+        <span>${t('val_taxa')}</span>${campo('valuation.taxaDesconto', estado.valuation.taxaDesconto, 'number', 'min="0" max="60" step="0.5"')}
+        <span>${t('val_cresc')}</span>${campo('valuation.crescimento', estado.valuation.crescimento, 'number', 'min="-20" max="40" step="0.5"')}
+      </div>
+      <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--linha)">
+        <strong class="num" style="font-size:21px;color:var(--mata)" data-saida="valFcd">${brl(a.fcd)}</strong>
+      </div>
+    </div>
+  </div>
+
+  ${a.anual <= 0 ? `<div class="ficha ficha--ferro" style="margin-top:14px"><span class="cod">${t('val_atencao')}</span>
+  <p>${t('val_atencaoTxt')}</p></div>` : ''}
+
+  <h3>${t('val_faixa')}</h3>
+  <div class="placar">
+    <div class="metrica"><span class="r">${t('val_piso')}</span><span class="v" data-saida="valMin">${brl(a.min)}</span><span class="obs">método mais conservador</span></div>
+    <div class="metrica bom"><span class="r">${t('val_ref')}</span><span class="v" data-saida="valorCentral">${brl(a.central)}</span><span class="obs">média dos três métodos</span></div>
+    <div class="metrica ocre"><span class="r">${t('val_teto')}</span><span class="v" data-saida="valMax">${brl(a.max)}</span><span class="obs">método mais otimista</span></div>
+  </div>
+  <p class="nota" style="margin-top:14px">${t('val_nota')}</p>`;
+}
+
+function rRiscos() {
+  return `
+  <p>${t('ris_intro')}</p>
+  <div class="tab-wrap">
+    <table>
+      <thead><tr><th style="width:40%">${t('ris_risco')}</th><th style="width:88px">${t('ris_impacto')}</th><th>${t('ris_acao')}</th></tr></thead>
+      <tbody>
+        ${estado.riscos.map(r => `
+        <tr${r.impacto === 'alto' ? ' class="risco"' : ''}>
+          <td><strong>${esc(r.risco)}</strong></td>
+          <td class="num" style="text-transform:uppercase;font-size:11px;letter-spacing:.1em;color:${r.impacto === 'alto' ? 'var(--ferrugem)' : 'rgba(34,27,18,.6)'}">${esc(r.impacto)}</td>
+          <td>${esc(r.acao)}</td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+  </div>
+  <h3>${t('ris_decisoes')}</h3>
+  <ol style="margin-left:20px;line-height:1.9;max-width:70ch">
+    ${estado.decisoes.map(d => `<li>${esc(d)}</li>`).join('')}
+  </ol>
+  <div class="ficha ficha--mata" style="margin-top:22px">
+    <span class="cod">${t('ris_prox')}</span>
+    <h4>${t('ris_proxH4')}</h4>
+    <p>${t('ris_proxTxt')}</p>
+  </div>`;
+}
+
+/* ---------- 6. RENDERIZAÇÃO E NAVEGAÇÃO ---------- */
+
+const palco = document.getElementById('palco');
+const indice = document.getElementById('indice');
+
+function montarIndice() {
+  const L = emDolar() ? 'en' : 'pt';
+  indice.innerHTML = SECOES.map((s, i) => `
+    <button class="item" data-i="${i}" aria-current="${i === secaoAtual}">
+      <span class="n">${s.n}</span><span>${L === 'en' ? s.titulo_en : s.titulo}</span>
+    </button>`).join('');
+}
+
+function montarSecoes() {
+  palco.innerHTML = SECOES.map((s, i) => `
+    <section class="sec ${i === secaoAtual ? 'viva' : ''}" id="sec-${s.id}">
+      ${s.id === 'capa' ? '' : `<div class="sec-cab">
+        <span class="eyebrow">${s.n} · ${esc(emDolar() ? s.eyebrow_en : s.eyebrow)}</span>
+        <h2>${esc(emDolar() ? s.titulo_en : s.titulo)}</h2>
+      </div>`}
+      <div class="conteudo">${s.render()}</div>
+      <div class="narrativa-slot" id="narrativa-${s.id}">${narrativaHTML(s.id)}</div>
+      <div class="nav-pe">
+        ${i > 0 ? `<button data-i="${i - 1}"><span>${t('nav_ant')}</span>${SECOES[i - 1].n} · ${emDolar() ? SECOES[i - 1].titulo_en : SECOES[i - 1].titulo}</button>` : '<span></span>'}
+        ${i < SECOES.length - 1 ? `<button data-i="${i + 1}"><span>${t('nav_prox')}</span>${SECOES[i + 1].n} · ${emDolar() ? SECOES[i + 1].titulo_en : SECOES[i + 1].titulo}</button>` : '<span></span>'}
+      </div>
+    </section>`).join('');
+}
+
+function narrativaHTML(id) {
+  const t = estado.narrativas[id];
+  if (!t) return '';
+  return `<div class="narrativa">
+    <span class="marca-ia">Narrativa gerada por IA</span>
+    ${t.split(/\n{2,}/).map(par => `<p>${esc(par.trim())}</p>`).join('')}
+    <button class="bt-min" data-acao="limpar-narrativa" data-sec="${id}" style="margin-top:8px">remover este texto</button>
+  </div>`;
+}
+
+function irPara(i, foco) {
+  secaoAtual = Math.max(0, Math.min(SECOES.length - 1, i));
+  document.querySelectorAll('.sec').forEach((s, k) => s.classList.toggle('viva', k === secaoAtual));
+  const itensIndice = [...document.querySelectorAll('.item')];
+  itensIndice.forEach((b, k) => b.setAttribute('aria-current', k === secaoAtual));
+  document.getElementById('trilha').textContent = `${SECOES[secaoAtual].n} · ${SECOES[secaoAtual].titulo}`;
+  if (foco !== false) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (window.matchMedia('(max-width:900px), (hover:none) and (pointer:coarse)').matches) {
+      itensIndice[secaoAtual]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+  }
+}
+
+function redesenhar(manterFoco) {
+  const ativo = document.activeElement;
+  const id = ativo && ativo.dataset ? ativo.dataset.liga : null;
+  const pos = ativo && ativo.selectionStart;
+  montarSecoes();
+  irPara(secaoAtual, false);
+  recalcular();
+  converterReaisParaDolar();
+  if (manterFoco && id) {
+    const novo = document.querySelector(`[data-liga="${id}"]`);
+    if (novo) { novo.focus(); try { novo.setSelectionRange(pos, pos); } catch (e) {} }
+  }
+}
+
+/* ---------- 7. LIGAÇÃO DE CAMPOS E RECÁLCULO ---------- */
+
+function gravar(caminho, valor) {
+  const partes = caminho.split('.');
+  let alvo = estado;
+  for (let i = 0; i < partes.length - 1; i++) alvo = alvo[partes[i]];
+  alvo[partes[partes.length - 1]] = valor;
+}
+
+function derivados() {
+  const p = projetar();
+  const a = avaliar();
+  const fA = folhaFixaMensal('A');
+  const fB = folhaFixaMensal('B');
+  const fC = folhaFixaMensal('C');
+  const semOrc = itensSemOrcamento();
+
+  const comp = ['A', 'B', 'C'].map(k => {
+    const f = estado.folha[k];
+    const fixoUnit = (Number(estado.folha.valoresBase.funcionarioFixo) || 0) * (1 + (Number(estado.folha.encargosPct) || 0) / 100);
+    const folhaFixa = (Number(f.fixos) || 0) * fixoUnit;
+    const serv = (Number(f.rocoadeiraServ) || 0) * (Number(estado.folha.valoresBase.rocoadeira) || 0)
+               + (Number(f.diariaLimpezaServ) || 0) * (Number(estado.folha.valoresBase.diariaLimpeza) || 0);
+    const custoMes = folhaFixa + serv;
+    const cap = capitalExtraConfig(k);
+    return { k, fixos: f.fixos, folhaFixa, serv, custoMes, semestre: custoMes * 6, cap, capIni: custoTotalObras() + cap + (Number(estado.invest.reservaGiro) || 0) };
+  });
+  const out = {
+    capital: brl(p.cap),
+    capitalObs: estado.invest.capitalManual !== null && estado.invest.capitalManual !== ''
+      ? 'valor definido manualmente'
+      : `obras + giro${semOrc ? ` · ${semOrc} sem orçamento` : ''}`,
+    totalCustos: brl(custoTotalObras()),
+    payback: p.payback ? p.payback + ' m' : '—',
+    paybackCapa: p.payback ? p.payback + ' meses' : 'além do horizonte',
+    paybackObs: p.payback ? 'mês em que o caixa cruza o zero' : `não ocorre em ${p.N} meses`,
+    caixaMin: brl(Math.abs(p.caixaMin)),
+    caixaObs: Math.abs(p.caixaMin) > p.cap + 1
+      ? `faltam ${brl(Math.abs(p.caixaMin) - p.cap)} além do capital previsto`
+      : 'coberto pelo capital previsto',
+    resultado: brl(p.resultado),
+    resultadoObs: `depois de ${p.N} meses`,
+    custoMes: brl(p.custoMes),
+    equilibrio: brl(p.equilibrioReceita),
+    margem: pct(p.margem),
+    roi: pct(p.roi),
+    roiObs: `no horizonte de ${p.N} meses`,
+    folhaTotalA: brl(fA),
+    folhaTotalB: brl(fB),
+    folhaTotalC: brl(fC),
+    difFolha: brl(Math.abs(fA - fB)),
+    difFolhaAno: brl(Math.abs(fA - fB) * 12),
+    difCapAC: brl(capitalExtraConfig('C') - capitalExtraConfig('A')),
+    resAnual: brlc(a.anual),
+    valBenf: brl(a.benfeitorias),
+    valMult: brl(a.multiplo),
+    valFcd: brl(a.fcd),
+    valMin: brl(a.min),
+    valorCentral: brl(a.central),
+    valMax: brl(a.max),
+    _p: p
+  };
+  comp.forEach(o => {
+    out['fxFixos' + o.k] = o.fixos;
+    out['fxFolha' + o.k] = brl(o.folhaFixa);
+    out['fxServ' + o.k] = brl(o.serv);
+    out['fxCusto' + o.k] = brl(o.custoMes);
+    out['fxSemestre' + o.k] = brl(o.semestre);
+    out['fxCap' + o.k] = o.cap ? (o.cap > 0 ? '+' : '') + brl(o.cap) : '—';
+    out['fxCapIni' + o.k] = brl(o.capIni);
+  });
+  return out;
+}
+
+function recalcular() {
+  const D = derivados();
+  document.querySelectorAll('[data-saida]').forEach(el => {
+    const k = el.dataset.saida;
+    if (k in D) el.textContent = D[k];
+  });
+  document.querySelectorAll('[data-saida-classe]').forEach(el => {
+    const k = el.dataset.saidaClasse;
+    el.classList.remove('bom', 'ruim', 'ocre');
+    if (k === 'paybackClasse') el.classList.add(D._p.payback ? 'bom' : 'ruim');
+    if (k === 'resultadoClasse') el.classList.add(D._p.resultado >= 0 ? 'bom' : 'ruim');
+    if (k === 'caixaClasse') el.classList.add(Math.abs(D._p.caixaMin) > D._p.cap + 1 ? 'ruim' : 'bom');
+  });
+  const svg = document.getElementById('terreno-svg');
+  if (svg) svg.innerHTML = desenharTerreno();
+  const tab = document.getElementById('tabela-fluxo');
+  if (tab) tab.innerHTML = linhasFluxo(D._p);
+  const capMan = document.querySelector('[data-liga="invest.capitalManual"]');
+  if (capMan && !capMan.value) capMan.placeholder = brlc(capitalInicial());
+}
+
+document.addEventListener('input', e => {
+  const el = e.target;
+  if (!el.dataset || !el.dataset.liga) return;
+  let v = el.value;
+  if (el.type === 'number') {
+    if (el.dataset.moeda) v = v === '' ? null : Number(v) * (emDolar() ? taxaAtual() : 1);
+    else v = v === '' ? null : Number(v);
+  }
+  gravar(el.dataset.liga, v);
+  recalcular();
+});
+
+document.addEventListener('change', e => {
+  const el = e.target;
+  if (el.dataset && el.dataset.liga && el.dataset.recarrega) {
+    let val = el.type === 'number' ? (el.value === '' ? null : Number(el.value)) : el.value;
+    if (el.dataset.moeda && val !== null) val = val * (emDolar() ? taxaAtual() : 1);
+    gravar(el.dataset.liga, val);
+    redesenhar(false); return;
+  }
+  if (el.dataset && el.dataset.marco !== undefined) {
+    estado.marcosFeitos[el.dataset.marco] = el.checked;
+  }
+});
+
+/* ---------- 8. AÇÕES ---------- */
+
+function aplicarIdioma() {
+  const L = emDolar() ? 'en' : 'pt';
+  document.documentElement.lang = L === 'en' ? 'en' : 'pt-BR';
+  const set = (id, txt) => { const e = document.getElementById(id); if (e) e.textContent = txt; };
+  set('bt-ia', t('t_ia')); set('bt-importar', t('t_import')); set('bt-exportar', t('t_export'));
+  set('bt-imprimir', t('t_print')); set('bt-restaurar', t('t_restore')); set('bt-idioma', t('t_idioma'));
+  set('m-sigla', t('m_sigla')); set('m-sub', t('m_sub')); set('rail-pe', t('rail_pe'));
+  const ind = document.getElementById('indice'); if (ind) ind.setAttribute('aria-label', t('indice_aria'));
+  set('gav-h3', t('gav_h3')); set('gav-p', t('gav_p'));
+  set('lbl-provedor', t('lbl_provedor')); set('lbl-modelo', t('lbl_modelo')); set('lbl-chave', t('lbl_chave'));
+  const ckp = document.getElementById('ia-chave'); if (ckp) ckp.placeholder = t('ph_chave');
+  set('chave-nota', t('chave_nota'));
+  set('lbl-alvo', t('lbl_alvo')); set('lbl-instrucao', t('lbl_instrucao'));
+  set('bt-gerar', t('bt_gerar')); set('bt-rascunho', t('bt_rascunho')); set('bt-inserir', t('bt_inserir')); set('bt-copiar', t('bt_copiar'));
+  montarIndice();
+  redesenhar(false);
+}
+document.getElementById('bt-idioma').onclick = () => {
+  estado.idioma = estado.idioma === 'en' ? 'pt' : 'en';
+  aplicarIdioma();
+};
+
+document.addEventListener('click', e => {
+  const b = e.target.closest('button');
+  if (!b) return;
+
+  if (b.dataset.i !== undefined && (b.classList.contains('item') || b.closest('.nav-pe'))) {
+    irPara(Number(b.dataset.i)); return;
+  }
+  if (b.dataset.cenario) {
+    estado.invest.cenario = b.dataset.cenario;
+    document.querySelectorAll('[data-cenario]').forEach(x => x.classList.toggle('on', x === b));
+    recalcular(); return;
+  }
+
+  const acao = b.dataset.acao;
+  if (!acao) return;
+
+  if (acao === 'add-custo') {
+    estado.custos.push({ item: 'Novo item', dias: null, custo: null, nota: '' });
+    redesenhar();
+  } else if (acao === 'remover-custo') {
+    estado.custos.splice(Number(b.dataset.i), 1); redesenhar();
+  } else if (acao === 'add-equipe') {
+    estado.equipe.push({ cod: '··', nome: 'Nome', frente: 'Frente', papel: 'Responsabilidade' });
+    redesenhar();
+  } else if (acao === 'remover-equipe') {
+    estado.equipe.splice(Number(b.dataset.i), 1); redesenhar();
+  } else if (acao === 'baixar-custos') {
+    baixarCustosJson();
+  } else if (acao === 'limpar-narrativa') {
+    delete estado.narrativas[b.dataset.sec];
+    document.getElementById('narrativa-' + b.dataset.sec).innerHTML = '';
+  } else if (acao === 'foto-sitio') {
+    document.getElementById('foto-sitio-input').click();
+  }
+});
+
+const fotoInput = document.getElementById('foto-sitio-input');
+fotoInput.onchange = ev => {
+  const f = ev.target.files[0]; if (!f) return;
+  const leitor = new FileReader();
+  leitor.onload = () => {
+    estado.fotoSitio = leitor.result;
+    const quadro = document.querySelector('[data-acao="foto-sitio"]');
+    if (quadro) {
+      const img = quadro.querySelector('img');
+      const ph = quadro.querySelector('[data-role="foto-ph"]');
+      img.src = estado.fotoSitio; img.hidden = false;
+      if (ph) ph.style.display = 'none';
+    }
+  };
+  leitor.readAsDataURL(f);
+  ev.target.value = '';
+};
+
+document.addEventListener('keydown', e => {
+  if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) return;
+  if (document.getElementById('gaveta').classList.contains('aberta')) {
+    if (e.key === 'Escape') fecharGaveta();
+    return;
+  }
+  if (e.key === 'ArrowRight') irPara(secaoAtual + 1);
+  if (e.key === 'ArrowLeft') irPara(secaoAtual - 1);
+});
+
+/* ---------- 9. IMPORTAR / EXPORTAR ---------- */
+
+function baixar(nome, conteudo) {
+  const blob = new Blob([conteudo], { type: 'application/json;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = nome; a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1500);
+}
+
+function baixarCustosJson() {
+  const saida = {
+    moeda: 'BRL',
+    custos_diretos: estado.custos.map(c => ({ item: c.item, dias: c.dias ?? null, custo: c.custo ?? null, nota: c.nota || '' })),
+    folha_clt: {
+      encargos_percentual: estado.folha.encargosPct + '%',
+      valores_base: {
+        funcionario_fixo: estado.folha.valoresBase.funcionarioFixo,
+        diaria_limpeza: estado.folha.valoresBase.diariaLimpeza,
+        rocoadeira: estado.folha.valoresBase.rocoadeira,
+        servico_geral: estado.folha.valoresBase.servicoGeral
+      },
+      configuracoes: {
+        A: { descricao: estado.folha.A.equipe, funcionarios_fixos: estado.folha.A.fixos, folha_mensal: Math.round(folhaFixaMensal('A')), capital_extra: estado.folha.A.capitalExtra, desconta_estufa_nova: estado.folha.A.descontaEstufaNova },
+        B: { descricao: estado.folha.B.equipe, funcionarios_fixos: estado.folha.B.fixos, servico_campo_rocoadeira: estado.folha.B.rocoadeiraServ, diarias_limpeza: estado.folha.B.diariaLimpezaServ, folha_mensal: Math.round(folhaFixaMensal('B')) },
+        C: { descricao: estado.folha.C.equipe, funcionarios_fixos: estado.folha.C.fixos, folha_mensal: Math.round(folhaFixaMensal('C')), capital_extra: estado.folha.C.capitalExtra, desconta_estufa_nova: estado.folha.C.descontaEstufaNova }
+      }
+    },
+    canais_comercializacao: estado.canais,
+    producao: estado.producao
+  };
+  baixar('custos.json', JSON.stringify(saida, null, 2));
+}
+
+document.getElementById('bt-exportar').onclick = () => {
+  baixar('guajupia-dados.json', JSON.stringify({ versao: 1, gerado: new Date().toISOString(), estado }, null, 2));
+};
+document.getElementById('bt-importar').onclick = () => document.getElementById('arquivo-import').click();
+document.getElementById('arquivo-import').onchange = ev => {
+  const f = ev.target.files[0]; if (!f) return;
+  const leitor = new FileReader();
+  leitor.onload = () => {
+    try {
+      const j = JSON.parse(leitor.result);
+      estado = j.estado ? j.estado : estadoPadrao(j.custos_diretos ? j : CUSTOS_EMBUTIDO, j.fases ? j : CRONO_EMBUTIDO);
+      redesenhar(); recalcular();
+    } catch (err) {
+      alert(t('alert_import'));
+    }
+  };
+  leitor.readAsText(f);
+  ev.target.value = '';
+};
+document.getElementById('bt-imprimir').onclick = () => window.print();
+document.getElementById('bt-restaurar').onclick = () => {
+  if (confirm(t('confirm_restore'))) {
+    estado = estadoPadrao(CUSTOS_EMBUTIDO, CRONO_EMBUTIDO);
+    secaoAtual = 0; redesenhar(); recalcular();
+  }
+};
+
+/* ---------- 10. GAVETA DE IA ---------- */
+
+const MODELOS = {
+  gemini: [['gemini-2.5-flash', 'gemini-2.5-flash — rápido'], ['gemini-2.5-pro', 'gemini-2.5-pro — mais elaborado']],
+  deepseek: [['deepseek/deepseek-v4-pro', 'deepseek-v4-pro'], ['deepseek/deepseek-v4-flash', 'deepseek-v4-flash']]
+};
+
+const gaveta = document.getElementById('gaveta');
+const veu = document.getElementById('veu');
+const selProv = document.getElementById('ia-provedor');
+const selMod = document.getElementById('ia-modelo');
+const selAlvo = document.getElementById('ia-alvo');
+const txtPrompt = document.getElementById('ia-prompt');
+const boxEstado = document.getElementById('ia-estado');
+const boxSaida = document.getElementById('ia-saida');
+const boxAcoes = document.getElementById('ia-acoes');
+
+function abrirGaveta() {
+  gaveta.classList.add('aberta'); veu.classList.add('on');
+  gaveta.setAttribute('aria-hidden', 'false');
+  selAlvo.value = SECOES[secaoAtual].id;
+  montarPrompt();
+  document.getElementById('ia-chave').focus();
+}
+function fecharGaveta() {
+  gaveta.classList.remove('aberta'); veu.classList.remove('on');
+  gaveta.setAttribute('aria-hidden', 'true');
+  document.getElementById('bt-ia').focus();
+}
+document.getElementById('bt-ia').onclick = abrirGaveta;
+document.getElementById('bt-fechar-ia').onclick = fecharGaveta;
+veu.onclick = fecharGaveta;
+
+function montarModelos() {
+  selMod.innerHTML = MODELOS[selProv.value].map(([v, r]) => `<option value="${v}">${r}</option>`).join('');
+}
+selProv.onchange = montarModelos;
+selAlvo.innerHTML = SECOES.map(s => `<option value="${s.id}">${s.n} · ${s.titulo}</option>`).join('');
+selAlvo.onchange = montarPrompt;
+montarModelos();
+
+function contexto() {
+  const p = projetar(); const a = avaliar();
+  return [
+    `Projeto Guajupiá — implantação agroecológica, 15/08/2026 a 15/02/2027.`,
+    `Produção: ${estado.producao.base}; fruticultura de ${estado.producao.frutas.join(', ')}.`,
+    `Área produtiva prioritária: ${estado.producao.areas_ha.produtiva_urgente} ha. Estufa de 96 m².`,
+    `Capital inicial: ${brl(p.cap)}. Custo mensal fixo: ${brl(p.custoMes)} (cenário ${p.cen}).`,
+    `Receita cheia prevista: ${brl(estado.invest.receitaPlena)}/mês a partir do mês ${estado.invest.mesInicioReceita}.`,
+    `Retorno do capital: ${p.payback ? p.payback + ' meses' : 'além do horizonte'}. Caixa mais baixo: ${brl(p.caixaMin)}.`,
+    `Valor de referência do negócio: ${brl(a.central)}.`,
+    `Canais: ${estado.canais.map(c => c.canal).join('; ')}.`
+  ].join('\n');
+}
+
+function montarPrompt() {
+  const s = SECOES.find(x => x.id === selAlvo.value);
+  txtPrompt.value =
+`Escreva a narrativa do slide "${s.titulo}" do dossiê do projeto Guajupiá.
+Público: família, parceiros e possíveis investidores. Tom sério, rural, direto, sem jargão de startup.
+Português do Brasil. De 2 a 3 parágrafos curtos, texto corrido, sem títulos nem marcadores.
+
+Dados do projeto:
+${contexto()}`;
+}
+
+function estadoIA(txt, tipo) {
+  boxEstado.innerHTML = `<div class="estado-ia ${tipo}">${esc(txt)}</div>`;
+}
+
+async function chamarGemini(modelo, chave, prompt) {
+  const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelo}:generateContent?key=${encodeURIComponent(chave)}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+  });
+  const j = await r.json();
+  if (!r.ok) throw new Error(j?.error?.message || `HTTP ${r.status}`);
+  const t = j?.candidates?.[0]?.content?.parts?.map(p => p.text).filter(Boolean).join('\n');
+  if (!t) throw new Error('A resposta voltou vazia.');
+  return t;
+}
+
+async function chamarDeepSeek(modelo, chave, prompt) {
+  const r = await fetch('https://inference-api.nousresearch.com/v1/chat/completions', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + chave },
+    body: JSON.stringify({ model: modelo, messages: [{ role: 'user', content: prompt }] })
+  });
+  const j = await r.json();
+  if (!r.ok) throw new Error(j?.error?.message || `HTTP ${r.status}`);
+  const t = j?.choices?.[0]?.message?.content;
+  if (!t) throw new Error('A resposta voltou vazia.');
+  return t;
+}
+
+document.getElementById('bt-gerar').onclick = async () => {
+  const chave = document.getElementById('ia-chave').value.trim();
+  if (!chave) { estadoIA(t('ia_sem_chave'), 'erro'); return; }
+  estadoIA(t('ia_gerando'), 'info');
+  boxSaida.hidden = true; boxAcoes.hidden = true;
+  try {
+    const t = selProv.value === 'gemini'
+      ? await chamarGemini(selMod.value, chave, txtPrompt.value)
+      : await chamarDeepSeek(selMod.value, chave, txtPrompt.value);
+    boxSaida.textContent = t.trim();
+    boxSaida.hidden = false; boxAcoes.hidden = false;
+    estadoIA(t('ia_pronto'), 'ok');
+  } catch (err) {
+    const m = String(err.message || err);
+    if (/quota|429|RESOURCE_EXHAUSTED/i.test(m)) {
+      estadoIA('429 — ' + t('ia_rascunho'), 'erro');
+    } else if (/Failed to fetch|NetworkError|CORS/i.test(m)) {
+      estadoIA('A chamada não saiu do navegador. Pré-visualizações bloqueiam requisições externas: baixe o arquivo e rode com "python3 -m http.server". Se persistir, o provedor exige backend — ver README.', 'erro');
+    } else {
+      estadoIA('Não deu certo: ' + m, 'erro');
+    }
+  }
+};
+
+document.getElementById('bt-rascunho').onclick = () => {
+  const s = SECOES.find(x => x.id === selAlvo.value);
+  const p = projetar(); const a = avaliar();
+  const textos = {
+    capa: t('draft_capa', { cap: brl(p.cap), pb: p.payback ? 'o mês ' + p.payback : 'além do horizonte simulado' }),
+    proposito: t('draft_proposito'),
+    equipe: t('draft_equipe'),
+    estruturas: t('draft_estruturas'),
+    cronograma: t('draft_cronograma'),
+    custos: t('draft_custos', { tot: brl(custoTotalObras()) }),
+    rotina: t('draft_rotina'),
+    folha: t('draft_folha', { enc: pct(estado.folha.encargosPct), fa: brl(folhaFixaMensal('A')), fb: brl(folhaFixaMensal('B')), fc: brl(folhaFixaMensal('C')), dif: brl(capitalExtraConfig('C') - capitalExtraConfig('A')) }),
+    producao: t('draft_producao'),
+    investimento: t('draft_investimento', { cap: brl(p.cap), cm: brl(p.custoMes), eq: brl(p.equilibrioReceita), rec: brl(estado.invest.receitaPlena), cx: brl(p.caixaMin), pb_txt: p.payback ? 'O capital retorna no mês ' + p.payback + '.' : 'No horizonte simulado o capital ainda não retorna, o que pede receita maior ou custo mensal menor.' }),
+    valor: t('draft_valor', { min: brl(a.min), max: brl(a.max), ref: brl(a.central) }),
+    riscos: t('draft_riscos')
+  };
+  boxSaida.textContent = textos[s.id] || 'Sem rascunho local para esta seção.';
+  boxSaida.hidden = false; boxAcoes.hidden = false;
+  estadoIA(t('ia_rascunho'), 'ok');
+};
+
+document.getElementById('bt-inserir').onclick = () => {
+  const id = selAlvo.value;
+  estado.narrativas[id] = boxSaida.textContent;
+  const slot = document.getElementById('narrativa-' + id);
+  if (slot) slot.innerHTML = narrativaHTML(id);
+  estadoIA(t('ia_inserido') + ' ' + SECOES.find(s => s.id === id).n + '.', 'ok');
+};
+document.getElementById('bt-copiar').onclick = async () => {
+  try { await navigator.clipboard.writeText(boxSaida.textContent); estadoIA(t('ia_copiou'), 'ok'); }
+  catch (e) { estadoIA(t('ia_copiarbloq'), 'erro'); }
+};
+
+/* ---------- 11. CARGA INICIAL ---------- */
+
+async function carregarDados() {
+  // Se o app estiver sendo servido junto da pasta dados/, os arquivos externos mandam.
+  try {
+    const [rc, rk] = await Promise.all([
+      fetch('dados/custos.json', { cache: 'no-store' }),
+      fetch('dados/cronograma.json', { cache: 'no-store' })
+    ]);
+    if (rc.ok && rk.ok) {
+      const custos = await rc.json();
+      const crono = await rk.json();
+      if (custos.custos_diretos && crono.fases) {
+        estado = estadoPadrao(custos, crono);
+        redesenhar(false);
+      }
+    }
+  } catch (e) { /* sem servidor: seguem os dados embutidos */ }
+  recalcular();
+}
+
+montarIndice();
+montarSecoes();
+irPara(0, false);
+recalcular();      // preenche os derivados antes de qualquer ida à rede
+carregarDados();   // se houver servidor, dados/*.json sobrescreve o embutido
+
+</script>
+</body>
+</html>
